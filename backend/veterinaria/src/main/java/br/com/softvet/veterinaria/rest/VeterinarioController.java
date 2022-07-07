@@ -49,14 +49,23 @@ public class VeterinarioController {
 	}
 	
 	@PutMapping("{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable Integer id, @RequestBody Veterinario veterinarioAtualizado) {
 		repository
 		.findById(id)
 		.map(veterinario -> { 
 			veterinario.setNome(veterinarioAtualizado.getNome());
 			veterinario.setCpf(veterinarioAtualizado.getCpf());
+			veterinario.setTelefone(veterinarioAtualizado.getTelefone());
 			veterinario.setDataNascimento(veterinarioAtualizado.getDataNascimento());
+			veterinario.setEmail(veterinarioAtualizado.getEmail());
+			veterinario.setSexo(veterinarioAtualizado.getSexo());
+			veterinario.setCep(veterinarioAtualizado.getCep());
+			veterinario.setUf(veterinarioAtualizado.getUf());
+			veterinario.setCidade(veterinarioAtualizado.getCidade());
+			veterinario.setRua(veterinarioAtualizado.getRua());
+			veterinario.setNumero(veterinarioAtualizado.getNumero());
+			veterinario.setComplemento(veterinarioAtualizado.getComplemento());
 			return repository.save(veterinario);
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	

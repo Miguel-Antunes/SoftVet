@@ -7,8 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -38,24 +37,40 @@ public class Veterinario {
 	@Column(nullable = false, length = 11)
 	private String cpf;
 	
-	@Column(nullable = false)
-	private String sexo;
+	@Column(nullable = false, length = 11)
+	private Long telefone;
 	
-	@Column(name= "data_nascimento")
+	@Column(name= "data_nascimento", nullable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
 	
-	@Column(nullable = false)
-	private Long telefone;
+	@Column(length = 100 )
+	private String email;
 	
+	@Column(nullable = true)
+	private String sexo;
 	
 	@Column(name= "data_cadastro", updatable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataCadastro;
 	
-	@OneToOne
-	@JoinColumn(name= "id_endereco")
-	private Endereco endereco;
+	@Column(length = 8)
+	private Long cep;
+	
+	@Column(length = 2, nullable = false)
+	private String uf;
+	
+	@Column(length = 80, nullable = false)
+	private String cidade;
+	
+	@Column(length = 100, nullable = false)
+	private String rua;
+	
+	@Column(length = 5, nullable = false)
+	private int numero;
+	
+	@Column(length = 50)
+	private String complemento;
 	
 	@PrePersist 
 	public void prePersist() {
