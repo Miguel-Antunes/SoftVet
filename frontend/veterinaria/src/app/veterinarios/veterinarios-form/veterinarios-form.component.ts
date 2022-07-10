@@ -77,14 +77,12 @@ export class VeterinariosFormComponent implements OnInit {
       console.log("cep " + this.formulario.get("cep").value + " é invalido!")
     }
     else {
-      console.log(this.formulario.value)
-      //  console.log(this.veterinario);
-      // this.service
-      //  .cadastrar(this.formulario.value)
-      //  .subscribe(response => {
-      //   console.log(response);
-      //  }
-      //   )
+      this.service
+       .cadastrar(this.formulario.value)
+       .subscribe(response => {
+        console.log(response);
+       }
+        )
     }
 
   }

@@ -2,10 +2,12 @@
 @charset "UTF-8";
 :root {
   --color-primary: var(--dark);
-  --color-secondary: green;
+  --color-primary-light-80: rgb(69, 90, 109);
+  --color-secondary: rgb(69, 90, 109);
   --color-tertiary: lightgray;
   --color-danger: var(--red);
   --dark: #343a40;
+  --color-primary-dark-20: dark; /* cor do checkbox do organizador de colunas do po table */
   
   
   --blue: #007bff;

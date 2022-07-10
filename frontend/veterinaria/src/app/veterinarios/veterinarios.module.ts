@@ -5,10 +5,12 @@ import { VeterinariosFormComponent } from './veterinarios-form/veterinarios-form
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PoModule } from '@po-ui/ng-components';
+import { VeterinariosListComponent } from './veterinarios-list/veterinarios-list.component';
 
 @NgModule({
   declarations: [
-    VeterinariosFormComponent
+    VeterinariosFormComponent,
+    VeterinariosListComponent
   ],
   imports: [
     CommonModule,
