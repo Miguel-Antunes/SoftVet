@@ -1,5 +1,7 @@
 package br.com.softvet.veterinaria.rest;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,13 +29,13 @@ public class VeterinarioController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Veterinario cadastrar(@RequestBody Veterinario veterinario) {
+	public Veterinario cadastrar(@RequestBody @Valid Veterinario veterinario) {
 		return repository.save(veterinario);
 	}
 	
 	@GetMapping("{id}")
 	public Veterinario FindById(@PathVariable Integer id) {
-		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Veterinário não Encontrado!"));
 	}
 	
 	@DeleteMapping("{id}")
@@ -44,7 +46,7 @@ public class VeterinarioController {
 				repository.delete(veterinario);
 				return Void.TYPE;
 			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Veterinário não Encontrado!"));
 		
 	}
 	

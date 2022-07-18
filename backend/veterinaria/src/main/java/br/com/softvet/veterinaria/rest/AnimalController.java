@@ -1,5 +1,7 @@
 package br.com.softvet.veterinaria.rest;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +27,7 @@ public class AnimalController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Animal cadastrar(@RequestBody Animal animal) {
+	public Animal cadastrar(@RequestBody @Valid Animal animal) {
 		return repository.save(animal);
 	}
 	@GetMapping("{id}")

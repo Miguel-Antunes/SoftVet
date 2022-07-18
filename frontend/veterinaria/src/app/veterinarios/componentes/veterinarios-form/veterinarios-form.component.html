@@ -1,0 +1,131 @@
+<h1 class="mt-4">Veterinário</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+
+<div class="container">
+
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input p-label="Nome: *" formControlName="nome" p-error-pattern="Insira um nome de até 150 caracteres" (input)="removerNumeros('nome')" > </po-input>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  name="cpf"  p-label="CPF: *" p-mask="999.999.999-99" formControlName="cpf" ></po-input>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  p-label="Celular: *" p-mask="(99)99999-9999" formControlName="telefone"></po-input>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-datepicker p-label="Data de Nascimento: *"  formControlName="dataNascimento"> </po-datepicker>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  p-label="E-mail: *" p-error-pattern="Insira um email válido de até 100 caracteres" formControlName="email" ></po-input>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <label>Sexo: </label>
+                <div class="form-sexo">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexo" id="sexo.feminino" value="feminino" formControlName="sexo">
+                        <label class="form-check-label" for="sexo.feminino" >Feminino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexo" id="sexo.masculino" value="masculino" formControlName="sexo">
+                        <label class="form-check-label" for="sexo.masculino">Masculino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexo" id="sexo.outro" value="outro" formControlName="sexo">
+                        <label class="form-check-label" for="sexo.outro">Outro</label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    
+                    <po-input  p-label="CEP: " p-mask="99999-999" formControlName="cep" (p-blur)="buscaInfo()"></po-input>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  p-label="UF: *" p-mask="@@" formControlName="uf" [p-disabled]="validacao_campo ? 'true' : 'false'"
+                    ></po-input>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  p-label="Cidade: *" formControlName="cidade" (input)="removerNumeros('cidade')" [p-disabled]="validacao_campo ? 'true' : 'false'" ></po-input>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  p-label="Rua: *" formControlName="rua" (input)="removerNumeros('rua')" [p-disabled]="validacao_campo ? 'true' : 'false'"></po-input>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  p-label="Nº: *" p-mask="99999" formControlName="numero"></po-input>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <po-input  p-label="Complemento: " name="endereco.complemento" formControlName="complemento" ></po-input>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row botoes" >
+            <div class="coluna">
+                <button type="reset" class="btn btn-danger" >
+                    <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                </button>
+            </div>
+            <div class="coluna">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+            </div>
+            
+        </div>
+
+    </form>
+    <br>
+</div>

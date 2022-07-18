@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -32,12 +35,16 @@ public class Veterinario {
 	private Integer id;
 	
 	@Column(nullable = false, length = 150)
+	@NotEmpty(message = "{campo.nome.obrigatorio}")
 	private String nome;
 	
 	@Column(nullable = false, length = 11)
+	@NotNull(message = "{campo.cpf.obrigatorio}")
+	@CPF(message = "{campo.cpf.invalido}")
 	private String cpf;
 	
 	@Column(nullable = false, length = 11)
+	@NotNull(message = "{campo.telefone.obrigatorio}")
 	private Long telefone;
 	
 	@Column(name= "data_nascimento", nullable = false)
@@ -58,15 +65,19 @@ public class Veterinario {
 	private Long cep;
 	
 	@Column(length = 2, nullable = false)
+	@NotEmpty(message = "{campo.uf.obrigatorio}")
 	private String uf;
 	
 	@Column(length = 80, nullable = false)
+	@NotEmpty(message = "{campo.cidade.obrigatorio}")
 	private String cidade;
 	
 	@Column(length = 100, nullable = false)
+	@NotEmpty(message = "{campo.rua.obrigatorio}")
 	private String rua;
 	
 	@Column(length = 5, nullable = false)
+	@NotNull(message = "{campo.numero.obrigatorio}")
 	private int numero;
 	
 	@Column(length = 50)

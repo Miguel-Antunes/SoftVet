@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Veterinario } from './veterinarios/veterinario';
+import { Veterinario } from '../interfaces/veterinario';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BuscaCepService } from 'src/app/busca-cep.service';
-import { VeterinariosService } from 'src/app/veterinarios.service';
+import { VeterinariosService } from 'src/app/veterinarios/services/veterinarios.service';
 
 
 @Component({
