@@ -1,28 +1,27 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PoNotificationService } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoNotificationService } from '@po-ui/ng-components';
 import { BuscaCepService } from 'src/app/shared/services/busca-cep.service';
-import { VeterinariosService } from 'src/app/veterinarios/services/veterinarios.service';
 
+import { ProprietarioService } from '../../services/proprietario.service';
 
 @Component({
-  selector: 'app-veterinarios-form',
-  templateUrl: './veterinarios-form.component.html',
-  styleUrls: ['./veterinarios-form.component.css']
+  selector: 'app-proprietarios-form',
+  templateUrl: './proprietarios-form.component.html',
+  styleUrls: ['./proprietarios-form.component.css']
 })
-export class VeterinariosFormComponent implements OnInit {
+export class ProprietariosFormComponent implements OnInit {
   validacao_campo: boolean = false;
   formulario: FormGroup;
-  erros : any;
-
+  erros: any;
   constructor(
-    private service: VeterinariosService,
+    private service: ProprietarioService,
     private formBuilder: FormBuilder,
     private buscacep: BuscaCepService,
     private notificationService: PoNotificationService,
-    private router : Router
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.configurarFormulario();
@@ -79,16 +78,17 @@ export class VeterinariosFormComponent implements OnInit {
         this.notificationService.success("Cadastrado com sucesso!");
         this.router.navigate(['/', 'veterinarios-list']);
         console.log(response);
-      },(responseErro) => {
+      }, (responseErro) => {
         this.erros = responseErro.error.errors;
 
-        if(this.erros == 'CPF está inválido'){
+        if (this.erros == 'CPF está inválido') {
           this.formulario.get('cpf').setErrors({ incorrect: true });
           this.notificationService.setDefaultDuration(4000);
           this.notificationService.warning("CPF está inválido");
         }
       }
-    )}
+      )
+    }
   }
 
   removerNumeros(campo: string) {
@@ -96,7 +96,7 @@ export class VeterinariosFormComponent implements OnInit {
     valor = this.formulario.get(campo).value.replace(/[0-9]/g, '');
     this.formulario.get(campo).setValue(valor);
   }
-  cancelar(): void{
+  cancelar(): void {
     location.reload();
   }
 }

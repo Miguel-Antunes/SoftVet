@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProprietariosRoutingModule } from './proprietarios-routing.module';
-import { ProprietariosFormComponent } from './proprietarios-form/proprietarios-form.component';
-import { ProprietariosListComponent } from './proprietarios-list/proprietarios-list.component';
+import { ProprietariosFormComponent } from './componentes/proprietarios-form/proprietarios-form.component';
+import { ProprietariosListComponent } from './componentes/proprietarios-list/proprietarios-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PoModule } from '@po-ui/ng-components';
-
 
 @NgModule({
   declarations: [
@@ -17,7 +16,7 @@ import { PoModule } from '@po-ui/ng-components';
     CommonModule,
     ProprietariosRoutingModule,
     ReactiveFormsModule,
-    PoModule,
+    PoModule
   ]
 })
 export class ProprietariosModule { }

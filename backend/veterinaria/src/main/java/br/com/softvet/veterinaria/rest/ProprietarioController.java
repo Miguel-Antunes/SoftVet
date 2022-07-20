@@ -1,7 +1,10 @@
 package br.com.softvet.veterinaria.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +21,7 @@ import br.com.softvet.veterinaria.model.repository.ProprietarioRepository;
 
 @RestController
 @RequestMapping("/api/proprietarios")
+@CrossOrigin("http://localhost:4200")
 public class ProprietarioController {
 
 	@Autowired
@@ -28,9 +32,14 @@ public class ProprietarioController {
 	public Proprietario cadastrar(@RequestBody Proprietario proprietario) {
 		return repository.save(proprietario);
 	}
-
+	@GetMapping
+	public List<Proprietario> recuperarTodos(){
+		return repository.findAll();
+		
+	}
+	
 	@GetMapping("{id}")
-	public Proprietario FindById(@PathVariable Integer id) {
+	public Proprietario recuperarporId(@PathVariable Integer id) {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 

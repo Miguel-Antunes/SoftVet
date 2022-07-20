@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as jQuery from 'jquery';
-import { BuscaCepService } from './busca-cep.service';
+import { BuscaCepService } from './shared/services/busca-cep.service';
 
 @Component({
   selector: 'app-root',

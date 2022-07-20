@@ -10,6 +10,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { VeterinariosService } from './veterinarios/services/veterinarios.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProprietariosModule } from './proprietarios/proprietarios.module';
+import { ProprietarioService } from './proprietarios/services/proprietario.service';
+import { AnimaisModule } from './animais/animais.module';
 
 
 @NgModule({
@@ -24,10 +26,12 @@ import { ProprietariosModule } from './proprietarios/proprietarios.module';
     TemplateModule,
     VeterinariosModule,
     ProprietariosModule,
+    AnimaisModule,
     FontAwesomeModule
   ],
   providers: [
-    VeterinariosService
+    VeterinariosService,
+    ProprietarioService
   ],
   bootstrap: [AppComponent]
 })

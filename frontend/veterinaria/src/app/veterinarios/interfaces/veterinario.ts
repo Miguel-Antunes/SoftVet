@@ -1,4 +1,4 @@
-import { Endereco } from "../../endereco";
+import { Endereco } from "../../shared/interfaces/endereco";
 
 export class Veterinario{
     id: number;

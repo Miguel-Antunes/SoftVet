@@ -1,5 +1,7 @@
 package br.com.softvet.veterinaria.rest;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +35,15 @@ public class VeterinarioController {
 		return repository.save(veterinario);
 	}
 	
+	@GetMapping
+	public List<Veterinario> recuperarTodos(){
+		
+		return repository.findAll();
+		
+	}
+	
 	@GetMapping("{id}")
-	public Veterinario FindById(@PathVariable Integer id) {
+	public Veterinario recuperarPorId(@PathVariable Integer id) {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Veterinário não Encontrado!"));
 	}
 	

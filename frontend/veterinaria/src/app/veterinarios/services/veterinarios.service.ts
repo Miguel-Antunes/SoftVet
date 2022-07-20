@@ -14,6 +14,10 @@ export class VeterinariosService {
 
    cadastrar(veterinario: Veterinario): Observable<Veterinario> {
     return this.http.post<Veterinario>('http://localhost:8080/api/veterinarios', veterinario);
+   }
+
+   recuperarTodos(): Observable<Veterinario[]>{
+    return this.http.get<Veterinario[]>('http://localhost:8080/api/veterinarios');
 
    }
 

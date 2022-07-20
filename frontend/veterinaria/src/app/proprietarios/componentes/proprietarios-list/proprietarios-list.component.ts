@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
-import { Veterinario } from '../../interfaces/veterinario';
-import { VeterinariosService } from '../../services/veterinarios.service';
+import { Proprietario } from '../../interfaces/proprietario';
+import { ProprietarioService } from '../../services/proprietario.service';
 
 @Component({
-  selector: 'app-veterinarios-list',
-  templateUrl: './veterinarios-list.component.html',
-  styleUrls: ['./veterinarios-list.component.css']
+  selector: 'app-proprietarios-list',
+  templateUrl: './proprietarios-list.component.html',
+  styleUrls: ['./proprietarios-list.component.css']
 })
-export class VeterinariosListComponent implements OnInit {
+export class ProprietariosListComponent implements OnInit {
 
   breadCrumb: PoBreadcrumb = {
-    items: [{ label: 'Listagem de Veterinários', link: 'veterinarios-list' }, { label: 'Registar Veterinário', link: '' }]
+    items: [{ label: 'Listagem de Proprietários', link: 'proprietarios-list' }]
   }
 
   actions: Array<PoPageAction> = [{
     label: 'Registrar',
-    action: () => this.registrarVeterinario()
+    action: () => this.registrarProprietario()
   }]
 
   actionsTable: PoTableAction[] = [
@@ -31,7 +31,7 @@ export class VeterinariosListComponent implements OnInit {
     }
   ]
 
-  veterinarios: Veterinario[];
+  proprietarios: Proprietario[];
 
   readonly columns: PoTableColumn[] = [
     {
@@ -65,13 +65,12 @@ export class VeterinariosListComponent implements OnInit {
     }
   ];
 
-  constructor(public router: Router, public activatedRoute: ActivatedRoute, private veterinarioService : VeterinariosService) { }
+  constructor(public router: Router, public activatedRoute: ActivatedRoute, private proprietarioService : ProprietarioService) { }
 
   ngOnInit(): void {
 
-    this.veterinarioService.recuperarTodos().subscribe(response => {
-      this.veterinarios = response;
-      
+    this.proprietarioService.recuperarTodos().subscribe(response => {
+      this.proprietarios = response;
     })
 
     // this.veterinarios = [{
@@ -91,13 +90,10 @@ export class VeterinariosListComponent implements OnInit {
 
   }
   mostrarDados(): any {
-
-
-
   }
 
-  registrarVeterinario() {
-    this.router.navigate(['veterinarios-form'])
+  registrarProprietario() {
+    this.router.navigate(['proprietarios-form'])
   }
 
 }
