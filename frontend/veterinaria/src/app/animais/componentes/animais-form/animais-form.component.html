@@ -1,1 +1,87 @@
-<p>animais-form works!</p>
+<h1 class="mt-4">Animais</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+
+<div class="container">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div class="po-row">
+            <po-input class="po-md-6 " formControlName="nome" p-label="Nome do Animal*"
+                p-error-pattern="Insira um nome de até 150 caracteres!" (input)="removerNumeros('nome')">
+            </po-input>
+            <po-combo class="po-md-6" p-label="Proprietário*" formControlName="proprietario"
+                [p-options]="proprietarios">
+            </po-combo>
+        </div>
+
+        <div class="po-row">
+            <po-number class="po-md-6" p-placeholder="Ex: 2 anos" formControlName="idade" p-label="Idade"
+                p-error-pattern="Insira uma idade até 150 anos!">
+            </po-number>
+
+            <div class="col-md-6">
+
+                <label>Sexo: </label>
+                <div class="form-sexo">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexo" id="sexo.feminino" value="feminino"
+                            formControlName="sexo">
+                        <label class="form-check-label" for="sexo.feminino">Feminino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexo" id="sexo.masculino" value="masculino"
+                            formControlName="sexo">
+                        <label class="form-check-label" for="sexo.masculino">Masculino</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <div class="po-row">
+            <po-input class="po-md-6" formControlName="especie" p-label="Espécie*"
+                p-error-pattern="Insira uma espécie de até 100 caracteres!" (input)="removerNumeros('especie')">
+            </po-input>
+
+            <po-input class="po-md-6" formControlName="raca" p-label="Raça*"
+                p-error-pattern="Insira uma raça de até 100 caracteres!" (input)="removerNumeros('raca')">
+            </po-input>
+        </div>
+
+        <div class="po-row">
+            <po-input class="po-md-6" formControlName="cor" p-label="Cor*"
+                p-error-pattern="Insira uma cor de até 50 caracteres!" (input)="removerNumeros('cor')">
+            </po-input>
+
+            <po-number class="po-md-6" formControlName="altura" p-label="Altura*" p-placeholder="Ex: 60cm"
+                p-error-pattern="Insira uma altura de no máximo 1000cm!">
+            </po-number>
+        </div>
+        <div class="po-row">
+            <po-number class="po-md-6" formControlName="peso" p-label="Peso*"
+                p-error-pattern="Insira um peso de no máximo 5000 kg" p-placeholder="Ex: 10kg"> </po-number>
+            <po-input class="po-md-6" formControlName="tipoSangue" p-label="Tipo Sanguíneo"
+                p-error-pattern="Insira um tipo sanguíneo de até 3 caracteres!">
+            </po-input>
+        </div>
+
+        <div class="row botoes">
+            <div class="coluna">
+                <button (click)="cancelar()" type="reset" class="btn btn-danger">
+                    <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                </button>
+            </div>
+            <div class="coluna">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+    <br>
+
+</div>

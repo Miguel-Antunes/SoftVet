@@ -65,28 +65,13 @@ export class ProprietariosListComponent implements OnInit {
     }
   ];
 
-  constructor(public router: Router, public activatedRoute: ActivatedRoute, private proprietarioService : ProprietarioService) { }
+  constructor(public router: Router, public activatedRoute: ActivatedRoute, private proprietarioService: ProprietarioService) { }
 
   ngOnInit(): void {
 
     this.proprietarioService.recuperarTodos().subscribe(response => {
       this.proprietarios = response;
     })
-
-    // this.veterinarios = [{
-    //   id: '1',
-    //   nome: 'Giulia',
-    //   cpf: '45897780846',
-    //   telefone: '18997212406',
-    //   email: 'giulialazaro01@gmail.com'
-    // },
-    // {
-    //   id: '2',
-    //   nome: 'Joao',
-    //   cpf: '45897780846',
-    //   telefone: '5518997212406',
-    //   email: 'giulialazaro01@gmail.com'
-    // }]
 
   }
   mostrarDados(): any {

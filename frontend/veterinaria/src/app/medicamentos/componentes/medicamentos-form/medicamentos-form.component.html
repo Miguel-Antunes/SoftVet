@@ -1,0 +1,69 @@
+<h1 class="mt-4">Medicamentos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+
+<div class="container">
+
+
+
+
+
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+        <div class="po-row">
+            <div class="po-md-6">
+                <po-input formControlName="descricao" p-label="Descrição: *"
+                    p-error-pattern="Insira uma descrição de até 50 caracteres!" p-icon="po-icon po-icon-injector">
+                </po-input>
+            </div>
+            <div class="po-md-6">
+                <po-input formControlName="fabricante" p-label="Fabricante: "
+                    p-error-pattern="Insira um fabricante de até 50 caracteres!" p-icon="po-icon po-icon-handshake">
+                </po-input>
+            </div>
+            <div class="po-row">
+
+                <div class="po-md-6">
+                    <po-number formControlName="quantidade" p-label="Quantidade: *"
+                        p-error-pattern="Insira uma quantidade até 100000!" p-icon="po-icon po-icon-basket"></po-number>
+                </div>
+                <div class="po-md-6">
+
+                    <po-input formControlName="unidade" p-label="Unidade: *" p-placeholder="Ex: Mililitros"
+                        p-error-pattern="Insira a unidade de até 30 caracteres!" p-icon="po-icon po-icon-oil"
+                        (input)="removerNumeros('unidade')">
+                    </po-input>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="po-row">
+            <div class="po-md-6">
+                <po-datepicker formControlName="dataFabricacao" p-label="Data de Fabricação: "></po-datepicker>
+
+            </div>
+            <div class="po-md-6">
+                <po-datepicker formControlName="dataValidade" p-label="Data de Validade: "></po-datepicker>
+
+            </div>
+        </div>
+
+        <div class="row botoes">
+            <div class="coluna">
+                <button (click)="cancelar()" type="reset" class="btn btn-danger">
+                    <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                </button>
+            </div>
+            <div class="coluna">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

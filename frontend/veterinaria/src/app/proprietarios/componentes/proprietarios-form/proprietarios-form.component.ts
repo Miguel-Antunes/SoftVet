@@ -76,7 +76,7 @@ export class ProprietariosFormComponent implements OnInit {
     } else {
       this.service.cadastrar(this.formulario.value).subscribe((response) => {
         this.notificationService.success("Cadastrado com sucesso!");
-        this.router.navigate(['/', 'veterinarios-list']);
+        this.router.navigate(['/', 'proprietarios-list']);
         console.log(response);
       }, (responseErro) => {
         this.erros = responseErro.error.errors;

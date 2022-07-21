@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProprietariosModule } from './proprietarios/proprietarios.module';
 import { ProprietarioService } from './proprietarios/services/proprietario.service';
 import { AnimaisModule } from './animais/animais.module';
+import { MedicamentosModule } from './medicamentos/medicamentos.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { AnimaisModule } from './animais/animais.module';
     VeterinariosModule,
     ProprietariosModule,
     AnimaisModule,
+    MedicamentosModule,
     FontAwesomeModule
   ],
   providers: [

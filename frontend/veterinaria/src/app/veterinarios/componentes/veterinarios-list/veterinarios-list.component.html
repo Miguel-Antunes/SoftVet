@@ -1,10 +1,8 @@
-
-
 <po-page-default [p-actions]="actions" [p-breadcrumb]="breadCrumb" p-title="Listagem de Veterinários">
 
   <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="veterinarios">
 
-    <ng-template p-table-column-template p-property="cpf" let-value> 
+    <ng-template p-table-column-template p-property="cpf" let-value>
       <span [innerText]="value | cpfCnpj"></span>
     </ng-template>
 

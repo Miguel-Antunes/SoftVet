@@ -18,64 +18,57 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.softvet.veterinaria.model.entity.Animal;
-import br.com.softvet.veterinaria.model.repository.AnimalRepository;
+import br.com.softvet.veterinaria.model.entity.Medicamento;
+import br.com.softvet.veterinaria.model.repository.MedicamentoRepository;
 
 @RestController
-@RequestMapping("/api/animais")
+@RequestMapping("/api/medicamentos")
 @CrossOrigin("http://localhost:4200")
-public class AnimalController {
+public class MedicamentoController {
 	
 	@Autowired
-	private AnimalRepository repository;
+	private MedicamentoRepository repository;
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Animal cadastrar(@RequestBody @Valid Animal animal) {
-		return repository.save(animal);
+	public Medicamento cadastrar(@RequestBody @Valid Medicamento medicamento) {
+		return repository.save(medicamento);
+		
 	}
-	
 	@GetMapping
-	public List<Animal> recuperarTodos() {
+	public List<Medicamento> recuperarTodos() {
 		return repository.findAll();
 		
 	}
-	
 	@GetMapping("{id}")
-	public Animal recuperarPorId(@PathVariable Integer id) {
+	public Medicamento recuperarPorId(@PathVariable Long id) {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		
 	}
 	
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Integer id) {
-		repository
-			.findById(id).map( animal -> {
-				repository.delete(animal);
-				return Void.TYPE;
-			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-		
+	public void deletar (@PathVariable Long id) {
+		repository.findById(id)
+		.map( animal -> {
+			repository.delete(animal);
+			return Void.TYPE;
+		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable Integer id, @RequestBody Animal animalAtualizado) {
-		repository
-		.findById(id)
-		.map(animal -> { 
-			animal.setNome(animalAtualizado.getNome());
-			animal.setIdade(animalAtualizado.getIdade());
-			animal.setSexo(animalAtualizado.getSexo());
-			animal.setEspecie(animalAtualizado.getEspecie());
-			animal.setRaca(animalAtualizado.getRaca());
-			animal.setCor(animalAtualizado.getCor());
-			animal.setAltura(animalAtualizado.getAltura());
-			animal.setPeso(animalAtualizado.getPeso());
-			animal.setTipoSangue(animalAtualizado.getTipoSangue());
-			return repository.save(animal);
+	public void update(@PathVariable Long id, @RequestBody @Valid Medicamento medicamentoAtualizado) {
+		repository.findById(id)
+		.map(medicamento -> {
+			medicamento.setDescricao(medicamentoAtualizado.getDescricao());
+			medicamento.setFabricante(medicamentoAtualizado.getFabricante());
+			medicamento.setQuantidade(medicamentoAtualizado.getQuantidade());
+			medicamento.setUnidade(medicamentoAtualizado.getUnidade());
+			medicamento.setDataValidade(medicamentoAtualizado.getDataValidade());
+			medicamento.setDataFabricacao(medicamentoAtualizado.getDataFabricacao());
+			return repository.save(medicamento);
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-	
 	}
 
 }
