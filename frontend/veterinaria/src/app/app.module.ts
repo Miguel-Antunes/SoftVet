@@ -13,6 +13,9 @@ import { ProprietariosModule } from './proprietarios/proprietarios.module';
 import { ProprietarioService } from './proprietarios/services/proprietario.service';
 import { AnimaisModule } from './animais/animais.module';
 import { MedicamentosModule } from './medicamentos/medicamentos.module';
+import { AgendamentosModule } from './agendamentos/agendamentos.module';
+import { TesteCalendarModule } from './teste-calendar/teste-calendar.module';
+import { ConsultasModule } from './consultas/consultas.module';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { MedicamentosModule } from './medicamentos/medicamentos.module';
     ProprietariosModule,
     AnimaisModule,
     MedicamentosModule,
+    AgendamentosModule,
+    TesteCalendarModule,
+    ConsultasModule,
     FontAwesomeModule
   ],
   providers: [

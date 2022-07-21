@@ -55,7 +55,7 @@ public class ProprietarioController {
 	}
 
 	@PutMapping("{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable Integer id, @RequestBody Proprietario proprietarioAtualizado) {
 		repository.findById(id).map(proprietario -> {
 			proprietario.setNome(proprietarioAtualizado.getNome());
