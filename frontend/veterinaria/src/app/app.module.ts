@@ -14,8 +14,8 @@ import { ProprietarioService } from './proprietarios/services/proprietario.servi
 import { AnimaisModule } from './animais/animais.module';
 import { MedicamentosModule } from './medicamentos/medicamentos.module';
 import { AgendamentosModule } from './agendamentos/agendamentos.module';
-import { TesteCalendarModule } from './teste-calendar/teste-calendar.module';
 import { ConsultasModule } from './consultas/consultas.module';
+import { LoginModule } from './login/login.module';
 
 
 @NgModule({
@@ -28,12 +28,12 @@ import { ConsultasModule } from './consultas/consultas.module';
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
+    LoginModule,
     VeterinariosModule,
     ProprietariosModule,
     AnimaisModule,
     MedicamentosModule,
     AgendamentosModule,
-    TesteCalendarModule,
     ConsultasModule,
     FontAwesomeModule
   ],

@@ -6,17 +6,21 @@ import { ProprietariosFormComponent } from './componentes/proprietarios-form/pro
 import { ProprietariosListComponent } from './componentes/proprietarios-list/proprietarios-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PoModule } from '@po-ui/ng-components';
+import { PhonePipe } from '../shared/pipes/phone.pipe';
+import { CpfCnpjPipe } from '../shared/pipes/cpfCnpj.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     ProprietariosFormComponent,
-    ProprietariosListComponent
+    ProprietariosListComponent,
   ],
   imports: [
     CommonModule,
     ProprietariosRoutingModule,
     ReactiveFormsModule,
-    PoModule
+    PoModule,
+    SharedModule
   ]
 })
 export class ProprietariosModule { }

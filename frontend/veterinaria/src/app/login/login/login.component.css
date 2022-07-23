@@ -1,0 +1,10 @@
+.btn {
+    width: 30%;
+    height: 40px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: right;
+
+}

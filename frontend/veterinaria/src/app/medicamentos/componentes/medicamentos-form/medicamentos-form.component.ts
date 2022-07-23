@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PoNotification, PoNotificationService } from '@po-ui/ng-components';
+import { PoNotificationService } from '@po-ui/ng-components';
 import { MedicamentosService } from '../../services/medicamentos.service';
 
 @Component({

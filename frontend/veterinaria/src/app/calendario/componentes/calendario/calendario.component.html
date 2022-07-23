@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-6">
+        <h1 class="mt-4">Agendamentos</h1>
+
+    </div>
+
+    <div class="col-6 ">
+        <div class="text-right mt-4 mr-4ng s">
+            <div class="btn btn-outline-secondary" (click)="modal.open()">
+                Novo Agendamento
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Calendário</li>
+</ol>
+
+
+<div class="container pb-5">
+    <div class=" row text-center">
+
+        <div class="col-md-4">
+
+            <div class="btn-group">
+                <div class="btn btn-outline-secondary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()">
+                    Previous
+                </div>
+                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                    Today
+                </div>
+                <div class="btn btn-outline-secondary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()">
+                    Next
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'pt-BR' }}</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Month)"
+                    [class.active]="view === CalendarView.Month">
+                    Month
+                </div>
+                <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Week)"
+                    [class.active]="view === CalendarView.Week">
+                    Week
+                </div>
+                <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Day)"
+                    [class.active]="view === CalendarView.Day">
+                    Day
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+            [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+            locale="pt-BR">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase=" CalendarView.Week" [viewDate]="viewDate" [events]="events"
+            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+    </div>
+
+
+</div>
+
+<po-modal #modal p-title="Adicionar Eventos">
+
+    <div class="container">
+
+        <form [formGroup]="formularioEvento" (ngSubmit)="cadastrar()">
+
+
+            <div class="po-row">
+                <div class="po-md-6">
+                    <po-input formControlName="descricao" p-label="Descrição do evento:"></po-input>
+                </div>
+            </div>
+
+            <div class="po-row">
+                <div class="po-md-6">
+                    <po-combo formControlName="animal" p-label="Animal: *" [p-options]="animais"></po-combo>
+                </div>
+                <div class="po-md-6">
+                    <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-options]="veterinarios">
+                    </po-combo>
+                </div>
+            </div>
+
+            <div class="po-row">
+                <div class="po-md-6">
+                    <po-combo formControlName="prioridade" p-label="Selecione a prioridade" [p-options]="opcoes">
+                    </po-combo>
+                </div>
+                <div class="po-md-6">
+                    <po-datepicker formControlName="dataRealizacao" p-label="Data de Realização: *">
+                    </po-datepicker>
+                </div>
+
+            </div>
+            <po-modal-footer [p-disabled-align]="false">
+
+
+                <button type="reset" class="btn btn-danger mr-2">
+                    <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+            </po-modal-footer>
+
+
+
+        </form>
+    </div>
+
+</po-modal>

@@ -1,1 +1,12 @@
-<p>agendamentos-list works!</p>
+<po-page-default [p-actions]="actions" [p-breadcrumb]="breadCrumb" p-title="Listagem de Proprietários">
+
+    <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="agendamentos">
+
+        <ng-template p-table-column-template p-property="dataRealizacao" let-value>
+            <span [innerText]="value | data"></span>
+        </ng-template>
+
+    </po-table>
+
+</po-page-default>
+<router-outlet></router-outlet>

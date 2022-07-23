@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 :root {
   --color-primary: var(--dark);
@@ -12,9 +13,16 @@
   --color-combo-background-color-item-hover: rgb(68, 72, 79);
   --color-combo-color-primary: white;
   --color-combo-background-color-scrollbar: var(--dark);
+  --color-modal-color-overlay: rgba(10, 10, 10, 0.7);
+
+
 
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.cal-month-view .cal-day-cell.cal-today {
+  background-color: #5d646a52;
 }
 
 .po-container-arrows-columns-manager {

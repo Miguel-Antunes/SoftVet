@@ -1,15 +1,6 @@
 <po-page-default [p-actions]="actions" [p-breadcrumb]="breadCrumb" p-title="Listagem de Medicamentos">
 
     <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="medicamentos">
-
-        <ng-template p-table-column-template p-property="cpf" let-value>
-            <span [innerText]="value"></span>
-        </ng-template>
-
-        <ng-template p-table-column-template p-property="telefone" let-value>
-            <span [innerText]="value"></span>
-        </ng-template>
-
     </po-table>
 
 </po-page-default>

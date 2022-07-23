@@ -1,0 +1,61 @@
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center ">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header">
+                                <h3 class="tesxt-center font-weight-light my-4">
+                                    Entrar
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-danger" *ngIf="formulario.get('loginErro').value">
+                                    Login e/ou Senha incorreto(a);
+                                </div>
+
+                                <form [formGroup]=" formulario" (ngSubmit)="onSubmit()">
+
+                                    <div class="row">
+
+                                        <div class="col-lg-12">
+
+                                            <po-input p-label="Usuário: *" p-icon="po-icon po-icon-user"
+                                                formControlName="usuario"
+                                                p-error-pattern="Insira um email de até 20 caracteres!">
+
+                                            </po-input>
+                                            <po-password p-label="Senha: *" formControlName="senha"
+                                                p-error-pattern="Insira uma senha de até 20 caracteres!"> </po-password>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 mt-3 d-flex justify-content-end">
+                                            <button type="reset" class="btn btn-danger">
+                                                Cancelar
+                                            </button>
+
+                                            <button type="submit" class=" btn btn-success ml-2">
+                                                Entrar
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </main>
+
+    </div>
+
+</div>
