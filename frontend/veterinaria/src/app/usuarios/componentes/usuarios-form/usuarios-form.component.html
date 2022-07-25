@@ -1,0 +1,59 @@
+<h1 class="mt-4">Usuários</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+
+<div class="container">
+
+
+
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+        <div class="po-row">
+            <div class="col-md-6">
+                <po-input formControlName="nomeDeUsuario" p-label="Usuário: *" p-icon="po-icon po-icon-user"
+                    p-error-pattern="Insira um nome de usuário de até 20 caracteres!">
+
+                </po-input>
+            </div>
+        </div>
+
+        <!-- <div class="po-row">
+            <div class="col-md-6">
+                <po-password p-label="Senha: *" formControlName="senha"
+                    p-error-pattern="Insira uma senha de até 20 caracteres!">
+                </po-password>
+            </div>
+        </div> -->
+        <div class="po-row">
+
+            <div class="col-md-6">
+                <po-combo formControlName="permissao" p-label="Permissão: *" [p-options]="permissao"
+                    p-icon="po-icon po-icon-exclamation">
+                </po-combo>
+
+            </div>
+        </div>
+        <div class="po-row">
+            <div class="col-md-6">
+                <div class="row botoes">
+                    <div class="coluna">
+                        <button (click)="cancelar()" type="reset" class="btn btn-danger">
+                            <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                        </button>
+                    </div>
+                    <div class="coluna">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Salvar
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

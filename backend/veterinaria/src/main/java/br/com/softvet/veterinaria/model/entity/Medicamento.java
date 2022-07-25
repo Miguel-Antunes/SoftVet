@@ -34,7 +34,6 @@ public class Medicamento {
 	private String descricao;
 	
 	@Column( length= 50)
-	@NotEmpty(message = "{campo.fabricante.medicamento.obrigatorio}")
 	private String fabricante;
 	
 	@Column(nullable = false, length = 30)
@@ -55,7 +54,6 @@ public class Medicamento {
 	
 	@Column(name= "data_validade")
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "{campo.validade.medicamento}")
 	private LocalDate dataValidade;
 	
 	@PrePersist 

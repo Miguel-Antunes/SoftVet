@@ -17,8 +17,8 @@
                 </a>
                 <div class="collapse" id="agendamentos" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" routerLink="/agendamentos-form">Cadastrar Agendamento</a>
-                        <a class="nav-link" routerLink="/agendamentos-list">Listar Agendamentos</a>
+                        <a class="nav-link" routerLink="/agendamentos/form">Cadastrar Agendamento</a>
+                        <a class="nav-link" routerLink="/agendamentos/list">Listar Agendamentos</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" data-toggle="collapse" data-target="#animais" aria-expanded="false"
@@ -29,8 +29,8 @@
                 </a>
                 <div class="collapse" id="animais" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" routerLink="/animais-form">Cadastrar Animal</a>
-                        <a class="nav-link" routerLink="/animais-list">Listar Animais</a>
+                        <a class="nav-link" routerLink="/animais/form">Cadastrar Animal</a>
+                        <a class="nav-link" routerLink="/animais/list">Listar Animais</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" data-toggle="collapse" data-target="#consultas" aria-expanded="false"
@@ -41,8 +41,8 @@
                 </a>
                 <div class="collapse" id="consultas" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" routerLink="/veterinarios-form">Realizar Consulta</a>
-                        <a class="nav-link" routerLink="/veterinarios-list">Consultas Realizadas</a>
+                        <a class="nav-link" routerLink="/consultas/form">Realizar Consulta</a>
+                        <a class="nav-link" routerLink="/consultas/list">Consultas Realizadas</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" data-toggle="collapse" data-target="#medicamentos" aria-expanded="false"
@@ -53,8 +53,8 @@
                 </a>
                 <div class="collapse" id="medicamentos" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" routerLink="/medicamentos-form">Cadastrar Medicamento</a>
-                        <a class="nav-link" routerLink="/medicamentos-list">Listar Medicamentos</a>
+                        <a class="nav-link" routerLink="/medicamentos/form">Cadastrar Medicamento</a>
+                        <a class="nav-link" routerLink="/medicamentos/list">Listar Medicamentos</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" data-toggle="collapse" data-target="#proprietarios" aria-expanded="false"
@@ -65,8 +65,21 @@
                 </a>
                 <div class="collapse" id="proprietarios" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" routerLink="/proprietarios-form">Cadastrar Proprietário</a>
-                        <a class="nav-link" routerLink="/proprietarios-list">Listar Proprietários</a>
+                        <a class="nav-link" routerLink="/proprietarios/form">Cadastrar Proprietário</a>
+                        <a class="nav-link" routerLink="/proprietarios/list">Listar Proprietários</a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#usuarios" aria-expanded="false"
+                    aria-controls="collapseLayouts" *ngIf="roleAdmin">
+                    Usuários
+                    <div class=" sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i>
+                    </div>
+
+                </a>
+                <div class="collapse" id="usuarios" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" routerLink="/usuarios/form">Cadastrar Usuários</a>
+                        <a class="nav-link" routerLink="/usuarios/list">Listar usuários</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" data-toggle="collapse" data-target="#veterinarios" aria-expanded="false"
@@ -77,8 +90,8 @@
                 </a>
                 <div class="collapse" id="veterinarios" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" routerLink="/veterinarios-form">Cadastrar Veterinário</a>
-                        <a class="nav-link" href="/veterinarios-list">Listar Veterinários</a>
+                        <a class="nav-link" routerLink="/veterinarios/form">Cadastrar Veterinário</a>
+                        <a class="nav-link" href="/veterinarios/list">Listar Veterinários</a>
                     </nav>
                 </div>
 
@@ -86,8 +99,14 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            Start Bootstrap
+            <div class="Login">Usuário: {{usuario}}</div>
+            <div class="logout">
+                <a class="sb-nav-link-icon" href="#" (click)="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sair
+                </a>
+            </div>
         </div>
+
     </nav>
 </div>

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendarioComponent } from './componentes/calendario/calendario.component';
 
 const routes: Routes = [
-  { path: 'calendario-form', component: CalendarioComponent },
 ];
 
 @NgModule({

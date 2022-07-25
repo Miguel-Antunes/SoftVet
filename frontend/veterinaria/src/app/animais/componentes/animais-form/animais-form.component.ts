@@ -81,7 +81,7 @@ export class AnimaisFormComponent implements OnInit {
       this.service.cadastrar(this.formulario.value).subscribe((response) => {
         console.log(response);
         this.notificationService.success("Cadastrado com sucesso!");
-        this.router.navigate(['/', 'animais-list']);
+        this.router.navigate(['animais/list']);
 
       }
       )

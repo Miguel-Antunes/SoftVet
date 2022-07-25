@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoNotificationService } from '@po-ui/ng-components';
+import { PrimeiroAcessoService } from 'src/app/primeiro-acesso/services/primeiro-acesso.service';
 import { MedicamentosService } from '../../services/medicamentos.service';
 
 @Component({
@@ -17,11 +18,13 @@ export class MedicamentosFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: MedicamentosService,
     private router: Router,
-    private notificationService: PoNotificationService
+    private notificationService: PoNotificationService,
+    private primeiroAcessoService: PrimeiroAcessoService
   ) { }
 
   ngOnInit(): void {
     this.configurarFormulario();
+
   }
 
   configurarFormulario(): void {
@@ -47,7 +50,7 @@ export class MedicamentosFormComponent implements OnInit {
     } else {
       this.service.cadastrar(this.formulario.value).subscribe((response) => {
         this.notificationService.success("Cadastrado com sucesso!");
-        this.router.navigate(['/', 'medicamentos-list']);
+        this.router.navigate(['medicamentos/list']);
         console.log(response);
       }, (responseErro) => {
         console.log(responseErro)
@@ -64,4 +67,5 @@ export class MedicamentosFormComponent implements OnInit {
   cancelar(): void {
     location.reload();
   }
+
 }

@@ -13,7 +13,7 @@ export class MedicamentosListComponent implements OnInit {
 
 
   breadCrumb: PoBreadcrumb = {
-    items: [{ label: 'Listagem de Medicamentos', link: 'medicamentos-list' }]
+    items: [{ label: 'Listagem de Medicamentos', link: 'medicamentos/list' }]
   }
 
   actions: Array<PoPageAction> = [{
@@ -78,7 +78,7 @@ export class MedicamentosListComponent implements OnInit {
   }
 
   registraMedicamentos() {
-    this.router.navigate(['medicamentos-form'])
+    this.router.navigate(['medicamentos/form'])
   }
 
 }

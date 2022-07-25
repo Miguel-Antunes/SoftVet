@@ -13,7 +13,7 @@ export class AnimaisListComponent implements OnInit {
 
 
   breadCrumb: PoBreadcrumb = {
-    items: [{ label: 'Listagem de Animais', link: 'animais-list' }]
+    items: [{ label: 'Listagem de Animais', link: 'animais/list' }]
   }
 
   actions: Array<PoPageAction> = [{
@@ -78,7 +78,7 @@ export class AnimaisListComponent implements OnInit {
   }
 
   registrarAnimal() {
-    this.router.navigate(['animais-form'])
+    this.router.navigate(['animais/form'])
   }
 
   teste() {

@@ -12,7 +12,7 @@ import { ProprietarioService } from '../../services/proprietario.service';
 export class ProprietariosListComponent implements OnInit {
 
   breadCrumb: PoBreadcrumb = {
-    items: [{ label: 'Listagem de Proprietários', link: 'proprietarios-list' }]
+    items: [{ label: 'Listagem de Proprietários', link: 'proprietarios/list' }]
   }
 
   actions: Array<PoPageAction> = [{
@@ -78,7 +78,7 @@ export class ProprietariosListComponent implements OnInit {
   }
 
   registrarProprietario() {
-    this.router.navigate(['proprietarios-form'])
+    this.router.navigate(['proprietarios/form'])
   }
 
 }

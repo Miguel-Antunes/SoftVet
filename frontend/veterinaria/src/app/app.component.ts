@@ -1,5 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
-import * as jQuery from 'jquery';
+import { Component } from '@angular/core';
 import { BuscaCepService } from './shared/services/busca-cep.service';
 
 @Component({
@@ -7,41 +6,22 @@ import { BuscaCepService } from './shared/services/busca-cep.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'veterinaria';
 
-  ngAfterViewInit(): void {
-   
-    (function ($) {
-      "use strict";
-
-      var path = window.location.href;
-      $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
-        if (this.getAttribute("href") === path) {
-          $(this).addClass("active");
-        }
-      });
-
-
-      $("#sidebarToggle").on("click", function (e) {
-        e.preventDefault();
-        $("body").toggleClass("sb-sidenav-toggled");
-      });
-    })(jQuery);
-  }
-  constructor(private cepService : BuscaCepService){
+  constructor(private cepService: BuscaCepService) {
 
   }
-  consultaCep(cep, form){
+  consultaCep(cep, form) {
     return this.cepService
-    .buscar(cep).
-    subscribe((dados) => {
-      this.populaForm(dados, form);
+      .buscar(cep).
+      subscribe((dados) => {
+        this.populaForm(dados, form);
 
-    }
-    )
+      }
+      )
   }
-  populaForm(dados, form){
+  populaForm(dados, form) {
     form.setValue({
       cep: dados.cep,
       uf: dados.uf,

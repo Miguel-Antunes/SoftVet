@@ -12,7 +12,7 @@ import { AgendamentosService } from '../../services/agendamentos.service';
 export class AgendamentosListComponent implements OnInit {
 
   breadCrumb: PoBreadcrumb = {
-    items: [{ label: 'Listagem de Agendamentos', link: 'agendamentos-list' }]
+    items: [{ label: 'Listagem de Agendamentos', link: 'agendamentos/list' }]
   }
 
   actions: Array<PoPageAction> = [{
@@ -43,11 +43,6 @@ export class AgendamentosListComponent implements OnInit {
         { value: 'moderada', color: 'color-08', label: 'moderada' },
         { value: 'alta', color: 'color-07', label: 'alta' }
       ]
-
-
-      // color: (row, column) => {
-      //   return row[column] == 'baixa' ? 'color-09' : row[column] == 'moderada' ? 'color-08' : 'color-07'
-      // }
     },
     {
       property: 'descricao',
@@ -91,6 +86,6 @@ export class AgendamentosListComponent implements OnInit {
   }
 
   registrarProprietario() {
-    this.router.navigate(['proprietarios-form'])
+    this.router.navigate(['agendamentos/form'])
   }
 }

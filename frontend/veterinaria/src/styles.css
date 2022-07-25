@@ -21,6 +21,8 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+
+
 .cal-month-view .cal-day-cell.cal-today {
   background-color: #5d646a52;
 }
@@ -48,22 +50,6 @@
     display: none;
   }
 
-}
-
-
-#layoutAuthentication {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-#layoutAuthentication #layoutAuthentication_content {
-  min-width: 0;
-  flex-grow: 1;
-}
-
-#layoutAuthentication #layoutAuthentication_footer {
-  min-width: 0;
 }
 
 #layoutSidenav {

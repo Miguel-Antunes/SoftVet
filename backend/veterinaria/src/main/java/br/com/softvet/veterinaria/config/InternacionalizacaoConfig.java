@@ -1,7 +1,9 @@
-package config;
+package br.com.softvet.veterinaria.config;
+
 
 import java.util.Locale;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -11,7 +13,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 public class InternacionalizacaoConfig {
 	
 	@Bean
-	public MessageSource() {
+	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setBasename("classpath:mesages");
 		messageSource.setDefaultEncoding("ISO-8859-1");

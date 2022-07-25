@@ -12,7 +12,7 @@ import { VeterinariosService } from '../../services/veterinarios.service';
 export class VeterinariosListComponent implements OnInit {
 
   breadCrumb: PoBreadcrumb = {
-    items: [{ label: 'Listagem de Veterinários', link: 'veterinarios-list' }, { label: 'Registar Veterinário', link: '' }]
+    items: [{ label: 'Listagem de Veterinários', link: 'veterinarios/list' }, { label: 'Registar Veterinário', link: '' }]
   }
 
   actions: Array<PoPageAction> = [{
@@ -65,13 +65,13 @@ export class VeterinariosListComponent implements OnInit {
     }
   ];
 
-  constructor(public router: Router, public activatedRoute: ActivatedRoute, private veterinarioService : VeterinariosService) { }
+  constructor(public router: Router, public activatedRoute: ActivatedRoute, private veterinarioService: VeterinariosService) { }
 
   ngOnInit(): void {
 
     this.veterinarioService.recuperarTodos().subscribe(response => {
       this.veterinarios = response;
-      
+
     })
 
     // this.veterinarios = [{
@@ -97,7 +97,7 @@ export class VeterinariosListComponent implements OnInit {
   }
 
   registrarVeterinario() {
-    this.router.navigate(['veterinarios-form'])
+    this.router.navigate(['veterinarios/form'])
   }
 
 }

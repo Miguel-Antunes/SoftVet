@@ -1,0 +1,70 @@
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content ">
+
+        <div class="container">
+
+            <div class="row justify-content-center ">
+
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg ">
+                        <div class="card-header">
+                            <h2 class="text-center my-4">
+                                Login
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-danger" *ngIf="erro">
+                                Login e/ou Senha incorreto(a);
+                            </div>
+
+                            <form [formGroup]=" formulario" (ngSubmit)="onSubmit()">
+
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+
+                                        <po-input p-label="Usuário: *" p-icon="po-icon po-icon-user"
+                                            formControlName="usuario"
+                                            p-error-pattern="Insira um nome de usuário de até 20 caracteres!">
+
+                                        </po-input>
+                                        <po-password p-label="Senha: *" formControlName="senha"
+                                            p-error-pattern="Insira uma senha de até 20 caracteres!">
+                                        </po-password>
+                                        <div class="po-row">
+                                            <a href="primeiro-acesso" (click)="primeiroAcesso()">
+                                                Primeiro Acesso?
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mt-3 d-flex justify-content-end">
+                                        <button type="reset" class="btn btn-secondary">
+                                            Cancelar
+                                        </button>
+
+                                        <button type="submit" class=" btn btn-secondary ml-2">
+                                            Entrar
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</div>

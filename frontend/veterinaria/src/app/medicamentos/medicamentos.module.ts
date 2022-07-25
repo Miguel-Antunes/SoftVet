@@ -6,6 +6,7 @@ import { MedicamentosFormComponent } from './componentes/medicamentos-form/medic
 import { MedicamentosListComponent } from './componentes/medicamentos-list/medicamentos-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PoModule } from '@po-ui/ng-components';
+import { PrimeiroAcessoModule } from '../primeiro-acesso/primeiro-acesso.module';
 
 
 @NgModule({

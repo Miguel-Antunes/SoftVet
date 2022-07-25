@@ -77,9 +77,10 @@ export class VeterinariosFormComponent implements OnInit {
     } else {
       this.service.cadastrar(this.formulario.value).subscribe((response) => {
         this.notificationService.success("Cadastrado com sucesso!");
-        this.router.navigate(['/', 'veterinarios-list']);
+        this.router.navigate(['veterinarios/list']);
         console.log(response);
       }, (responseErro) => {
+        console.log(responseErro)
         this.erros = responseErro.error.errors;
 
         if (this.erros == 'CPF está inválido') {
