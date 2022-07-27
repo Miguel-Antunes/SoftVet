@@ -116,9 +116,16 @@ export class PrimeiroAcessoComponent implements OnInit {
 
 
           this.primeiroAcessoSerice.registrarSenha(this.clone.id, this.clone).subscribe(response => {
-            this.poNotification.setDefaultDuration(2000);
-            this.poNotification.success("Senha registrada com sucesso! Efetue o login!")
-            this.router.navigate(['login'])
+            this.poNotification.setDefaultDuration(3000);
+            this.poNotification.success("Senha registrada com sucesso! ")
+
+            setTimeout(() => {
+              localStorage.removeItem("access_token")
+              this.router.navigate(['/login'])
+            }, 2000);
+
+
+
           }, responseErro => {
             console.log(responseErro);
           })

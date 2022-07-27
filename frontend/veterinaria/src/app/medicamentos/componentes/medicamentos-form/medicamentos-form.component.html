@@ -22,22 +22,24 @@
                     p-error-pattern="Insira um fabricante de até 50 caracteres!" p-icon="po-icon po-icon-handshake">
                 </po-input>
             </div>
-            <div class="po-row">
-
-                <div class="po-md-6">
-                    <po-number formControlName="quantidade" p-label="Quantidade: *"
-                        p-error-pattern="Insira uma quantidade até 100000!" p-icon="po-icon po-icon-basket"></po-number>
-                </div>
-                <div class="po-md-6">
-
-                    <po-input formControlName="unidade" p-label="Unidade: *" p-placeholder="Ex: Mililitros"
-                        p-error-pattern="Insira a unidade de até 30 caracteres!" p-icon="po-icon po-icon-oil"
-                        (input)="removerNumeros('unidade')">
-                    </po-input>
-                </div>
-
-            </div>
         </div>
+
+        <div class="po-row">
+
+            <div class="po-md-6">
+                <po-number formControlName="quantidade" p-label="Quantidade: *"
+                    p-error-pattern="Insira uma quantidade até 100000!" p-icon="po-icon po-icon-basket"></po-number>
+            </div>
+            <div class="po-md-6">
+
+                <po-input formControlName="unidade" p-label="Unidade: *" p-placeholder="Ex: Mililitros"
+                    p-error-pattern="Insira a unidade de até 30 caracteres!" p-icon="po-icon po-icon-oil"
+                    (input)="removerNumeros('unidade')">
+                </po-input>
+            </div>
+
+        </div>
+
 
         <div class="po-row">
             <div class="po-md-6">

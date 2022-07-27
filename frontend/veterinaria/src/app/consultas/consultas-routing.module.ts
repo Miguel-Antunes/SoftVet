@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../layout/componentes/layout/layout.component';
-import { ConsultasFormComponent } from './consultas-form/consultas-form.component';
 import { ConsultasListComponent } from './componentes/consultas-list/consultas-list.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { ConsultasFormComponent } from './componentes/consultas-form/consultas-form.component';
 
 const routes: Routes = [
   {

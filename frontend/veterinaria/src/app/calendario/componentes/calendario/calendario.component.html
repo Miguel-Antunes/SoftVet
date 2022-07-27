@@ -1,26 +1,38 @@
-<div class="row">
-    <div class="col-6">
-        <h1 class="mt-4">Agendamentos</h1>
-
-    </div>
-
-    <div class="col-6 ">
-        <div class="text-right mt-4 mr-4ng s">
-            <div class="btn btn-outline-secondary" (click)="modal.open()">
-                Novo Agendamento
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-6 mt-4">
+            <div class="agendamentos">
+                <h1>Agendamentos</h1>
             </div>
+
+
         </div>
     </div>
 
 
-</div>
 
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Calendário</li>
-</ol>
+    <ol class="breadcrumb ">
+        <li class="breadcrumb-item active">Calendário</li>
+    </ol>
+
+    <div class="row">
+
+        <div class="col">
+            <div class="text-left mt-3 mb-4 mr-4">
+                <div class="novo-agendamento">
+                    <div class="btn btn-outline-secondary" (click)="setTitle()">
+                        Novo Agendamento
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
 
-<div class="container pb-5">
+
+
     <div class=" row text-center">
 
         <div class="col-md-4">
@@ -77,58 +89,78 @@
         </mwl-calendar-day-view>
     </div>
 
-
 </div>
 
-<po-modal #modal p-title="Adicionar Eventos">
+
+<po-modal #modal>
 
     <div class="container">
+        <div class="novo-anendamento mb-4" *ngIf="editarCadastrar">
+            <h2>Cadastrar Agendamento</h2>
+        </div>
+        <div class="novo-anendamento mb-4" *ngIf="visualizar">
+            <h2>Visualizar Agendamento</h2>
+        </div>
+        <div class="novo-anendamento mb-4" *ngIf="editarCadastrar">
+            <h2>Editar Agendamento</h2>
+        </div>
 
-        <form [formGroup]="formularioEvento" (ngSubmit)="cadastrar()">
+
+        <div class="container">
 
 
-            <div class="po-row">
-                <div class="po-md-6">
-                    <po-input formControlName="descricao" p-label="Descrição do evento:"></po-input>
-                </div>
-            </div>
 
-            <div class="po-row">
-                <div class="po-md-6">
-                    <po-combo formControlName="animal" p-label="Animal: *" [p-options]="animais"></po-combo>
-                </div>
-                <div class="po-md-6">
-                    <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-options]="veterinarios">
-                    </po-combo>
-                </div>
-            </div>
+            <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
 
-            <div class="po-row">
-                <div class="po-md-6">
-                    <po-combo formControlName="prioridade" p-label="Selecione a prioridade" [p-options]="opcoes">
-                    </po-combo>
-                </div>
-                <div class="po-md-6">
-                    <po-datepicker formControlName="dataRealizacao" p-label="Data de Realização: *">
-                    </po-datepicker>
+
+                <div class="po-row">
+                    <div class="po-md-6">
+                        <po-input formControlName="descricao" p-label="Descrição do evento:"></po-input>
+                    </div>
+
                 </div>
 
-            </div>
-            <po-modal-footer [p-disabled-align]="false">
+                <div class="po-row">
+                    <div class="po-md-6">
+                        <po-combo formControlName="animal" p-label="Animal: *" [p-disabled]="visualizar"
+                            [p-options]="animais"></po-combo>
+                    </div>
+                    <div class="po-md-6">
+                        <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-disabled]="visualizar"
+                            [p-options]="veterinarios">
+                        </po-combo>
+                    </div>
+                </div>
+
+                <div class="po-row">
+                    <div class="po-md-6">
+                        <po-combo formControlName="prioridade" p-label="Selecione a prioridade"
+                            [p-disabled]="visualizar" [p-options]="opcoes">
+                        </po-combo>
+                    </div>
+                    <div class="po-md-6">
+                        <po-datepicker formControlName="dataRealizacao" p-disabled="{{visualizar}}"
+                            p-label="Data de Realização: *">
+                        </po-datepicker>
+                    </div>
+
+                </div>
+                <po-modal-footer [p-disabled-align]="false">
 
 
-                <button type="reset" class="btn btn-danger mr-2">
-                    <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
-                </button>
+                    <button type="reset" class="btn btn-danger mr-2" *ngIf="!visualizar">
+                        <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                    </button>
 
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-save"></i> Salvar
-                </button>
-            </po-modal-footer>
+                    <button type="submit" class="btn btn-success" *ngIf="!visualizar">
+                        <i class="fa fa-save"></i> Salvar
+                    </button>
+                </po-modal-footer>
 
 
 
-        </form>
+            </form>
+        </div>
     </div>
 
 </po-modal>

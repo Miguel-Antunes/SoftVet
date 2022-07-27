@@ -1,41 +1,64 @@
 package br.com.softvet.veterinaria.model.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+
 
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name= "consultas")
+@Table(name= "consulta")
 public class Consulta {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
-	@Column(name= "data_realizacao")
+	@Column(nullable = false)
+	private Long idAnimal;
+	
+	@Column(nullable = false)
+	private Long idVeterinario;
+	
+	@Column(nullable = false, length = 10)
+	private String estadoAnimal;
+	
+	@Column(nullable = false, length = 10)
+	private String ferimento;
+	
+	@Column(nullable = false, length = 10)
+	private String dores;
+	
+	@Column(nullable = false, length = 10)
+	private String febre;
+	
+	@Column()
+	private String queixa;
+	
+	@Column()
+	private String observacao;
+    
+	@Column()
+	private String procedimento;
+		
+	@Column()
+	private String receita;
+	
+	@Column(nullable = false)
+	private String situacao;
+	
 	private LocalDate dataRealizacao;
 	
-	@ManyToOne
-	@JoinColumn(name="id_veterinario")
-	private Veterinario veterinario;
-	
-	@ManyToOne
-	@JoinColumn(name="id_animal")
-	private Animal animal;
-	
-	@Column
-	private BigDecimal valor;
-	
-	
+	@PrePersist
+	public void setData() {
+	setDataRealizacao(LocalDate.now());
+	}
 }

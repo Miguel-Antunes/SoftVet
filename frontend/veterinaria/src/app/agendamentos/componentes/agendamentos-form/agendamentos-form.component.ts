@@ -1,11 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { PoNotificationService } from '@po-ui/ng-components';
-import { map, Subject } from 'rxjs';
+import { map } from 'rxjs';
 import { AnimaisService } from 'src/app/animais/services/animais.service';
 import { CalendarioComponent } from 'src/app/calendario/componentes/calendario/calendario.component';
 import { VeterinariosService } from 'src/app/veterinarios/services/veterinarios.service';
-import { Agendamento } from '../../interfaces/Agendamento';
 import { AgendamentosService } from '../../services/agendamentos.service';
 
 
@@ -21,6 +19,9 @@ export class AgendamentosFormComponent implements OnInit {
   veterinarios: any[];
 
   @ViewChild("calendario") calendario: CalendarioComponent;
+
+  @Output()
+  fecharModal = new EventEmitter()
 
   constructor(
     private animalService: AnimaisService,

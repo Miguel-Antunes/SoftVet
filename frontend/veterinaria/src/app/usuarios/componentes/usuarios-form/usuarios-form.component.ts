@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PoNotificationService } from '@po-ui/ng-components';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuarioService } from '../../service/usuario.service';
@@ -27,7 +28,8 @@ export class UsuariosFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: UsuarioService,
     private auth: AuthService,
-    private poNotification: PoNotificationService
+    private poNotification: PoNotificationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,16 +59,24 @@ export class UsuariosFormComponent implements OnInit {
 
       this.service.encontrarPorNomeDeUsuario(usuario).subscribe(response => {
         this.idAdministrador = response.id;
-        console.log(this.idAdministrador)
         this.formulario.get("idAdmin").patchValue(this.idAdministrador)
       })
       setTimeout(() => {
         this.service.cadastrar(this.formulario.value).subscribe((response) => {
-          this.poNotification.setDefaultDuration(2000);
-          this.poNotification.success("Usuário Cadastrado com sucesso!")
+          this.poNotification.setDefaultDuration(3000);
+          this.poNotification.success("Usuário Cadastrado com sucesso!");
+          location.reload()
+
           console.log(response)
-        })
-      }, 2000);
+        },
+          (responseErro) => {
+
+            console.log(responseErro)
+            this.poNotification.setDefaultDuration(3000);
+            this.poNotification.warning("Nome de Usuario já cadastrado!");
+
+          })
+      }, 1500);
 
 
 

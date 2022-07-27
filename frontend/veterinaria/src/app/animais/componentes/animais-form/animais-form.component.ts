@@ -75,8 +75,6 @@ export class AnimaisFormComponent implements OnInit {
       this.notificationService.setDefaultDuration(4000);
       this.notificationService.warning('Preencha os campos obrigatórios!');
     } else {
-
-
       console.log(this.formulario.value)
       this.service.cadastrar(this.formulario.value).subscribe((response) => {
         console.log(response);

@@ -1,33 +1,19 @@
 import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-  Input,
-  Output,
-  EventEmitter,
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild
 } from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
-import { map, reduce, Subject, take } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PoModalComponent } from '@po-ui/ng-components';
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
-  CalendarView,
+  CalendarView
 } from 'angular-calendar';
-import { PoModalComponent } from '@po-ui/ng-components';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Agendamento } from 'src/app/agendamentos/interfaces/Agendamento';
+import {
+  isSameDay,
+  isSameMonth, startOfDay
+} from 'date-fns';
+import { map, Subject } from 'rxjs';
 import { AgendamentosService } from 'src/app/agendamentos/services/agendamentos.service';
 
 
@@ -56,7 +42,11 @@ const colors: any = {
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent implements OnInit {
-  formularioEvento: FormGroup;
+
+  visualizar: boolean = false;
+  editarCadastrar: boolean = false;
+
+  formulario: FormGroup;
 
   agendamentos: any;
 
@@ -69,13 +59,15 @@ export class CalendarioComponent implements OnInit {
   @Output()
   conteudoFormulario: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  // @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
+
+
 
   @ViewChild("modal", { static: true }) modal: PoModalComponent
 
@@ -97,10 +89,12 @@ export class CalendarioComponent implements OnInit {
       label: '<span class="ml-1"> <i class="fas fa-fw fa-pencil-alt"></i> </span>',
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        //this.handleEvent('Edited', event);
+        this.visualizar = false;
+        this.editarCadastrar = true;
+        this.formulario.get("descricao").enable();
 
         this.agendamentoService.recuperarPorId(<number>event.id).subscribe((response) => {
-          this.formularioEvento.patchValue({
+          this.formulario.patchValue({
             id: response.id,
             descricao: response.descricao,
             animal: response.animal,
@@ -109,6 +103,7 @@ export class CalendarioComponent implements OnInit {
             dataRealizacao: response.dataRealizacao
           })
           this.modal.open();
+
         })
 
       },
@@ -120,26 +115,22 @@ export class CalendarioComponent implements OnInit {
 
         if (confirm("Deseja excluir o agendamento " + event.title + "?")) {
           this.agendamentoService.deletar(<number>event.id).subscribe((response) => {
-            console.log(response);
+
           })
           location.reload();
 
         }
 
-        // this.agendamentoService.deletar(<number>event.id).subscribe((response) => {
-        //   console.log(response);
-        // })
-        // location.reload();
-
       },
     },
+
     {
-      label: '<span class="ml-1"> <i class="fas fa-fw fa-search"></i> </span>',
-      a11yLabel: 'Edit',
+      label: '<span class="ml-1"> <i class="fas fa-arrow-right"></i> </span>',
+      a11yLabel: 'consulta',
       onClick: ({ event }: { event: CalendarEvent }): void => {
 
         this.agendamentoService.recuperarPorId(<number>event.id).subscribe((response) => {
-          this.formularioEvento.patchValue({
+          this.formulario.patchValue({
             id: response.id,
             descricao: response.descricao,
             animal: response.animal,
@@ -168,28 +159,13 @@ export class CalendarioComponent implements OnInit {
   ngOnInit(): void {
     this.configurarFormulario();
     this.recuperarAgendamentos();
-    // setTimeout(() => {
-    //   this.events = [{
-    //     start: subDays(startOfDay(new Date()), 1),
-    //     end: addDays(new Date(), 1),
-    //     title: 'A 3 day event',
-    //     color: colors.red,
-    //     actions: this.actions,
-    //     allDay: true,
-    //     resizable: {
-    //       beforeStart: true,
-    //       afterEnd: true,
-    //     },
-    //     draggable: true,
-    //   }];
-    //   this.refresh.next();
-    // }, 2000);
+    console.log(this.modal)
 
   }
 
 
   configurarFormulario(): void {
-    this.formularioEvento = this.formBuilder.group({
+    this.formulario = this.formBuilder.group({
       id: [null],
       descricao: [null, [Validators.required, Validators.maxLength(40)]],
       animal: [null, Validators.required],
@@ -237,26 +213,26 @@ export class CalendarioComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
-  }
+    this.visualizar = true;
+    this.agendamentoService.recuperarPorId(<number>event.id).subscribe((response) => {
+      this.formulario.patchValue({
+        id: response.id,
+        descricao: response.descricao,
+        animal: response.animal,
+        veterinario: response.veterinario,
+        prioridade: response.prioridade,
+        dataRealizacao: response.dataRealizacao
 
-  // addEvent(): void {
-  //   this.events = [
-  //     ...this.events,
-  //     {
-  //       title: 'New event',
-  //       start: startOfDay(new Date()),
-  //       end: endOfDay(new Date()),
-  //       color: colors.red,
-  //       draggable: true,
-  //       resizable: {
-  //         beforeStart: true,
-  //         afterEnd: true,
-  //       },
-  //     },
-  //   ];
-  // }
+      })
+
+      this.formulario.get("descricao").disable();
+      this.modal.open();
+
+
+    })
+
+
+  }
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
@@ -292,15 +268,19 @@ export class CalendarioComponent implements OnInit {
         this.refresh.next();
       })
   }
+  setTitle(): void {
 
+    this.editarCadastrar = true;
+    this.visualizar = false;
+    this.modal.open();
+
+
+  }
   cadastrar(): void {
-    this.conteudoFormulario.emit(this.formularioEvento);
-
+    this.modal.onXClosed
+    this.conteudoFormulario.emit(this.formulario);
   }
 
-  teste() {
-    console.log(this.agendamentos)
-  }
 
 }
 

@@ -16,4 +16,6 @@ export class AnimaisService {
   recuperarTodos(): Observable<Animal[]> {
     return this.http.get<Animal[]>('http://localhost:8080/api/animais');
   }
+
+
 }

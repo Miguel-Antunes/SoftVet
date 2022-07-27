@@ -1,0 +1,179 @@
+<h1 class="mt-4">Consultas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+
+<div class="container">
+
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+
+        <div class="po-row">
+            <div class="po-md-6">
+                <po-combo formControlName="animal" p-label="Animal: *" [p-options]="animais"></po-combo>
+            </div>
+            <div class="po-md-6">
+                <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-options]="veterinarios">
+                </po-combo>
+            </div>
+        </div>
+
+        <div class="po-row">
+            <div class="po-md-6">
+                <po-input p-label="Data agendamento: " formControlName="dataAgendamento" *ngIf="agendado">
+
+                </po-input>
+
+            </div>
+        </div>
+        <div class="col-md-12 pt-3">
+
+            <div class="formulario-label">
+                Formulario rápido:
+            </div>
+            <table class="table table-striped">
+
+                <tbody>
+                    <tr>
+
+                        <td>Estado do animal:</td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="estado.tranquilo"
+                                    formControlName="estadoAnimal" value="tranquilo">
+                                <label class="form-check-label" for="estado.tranquilo">Tranquilo</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="estado.deprimido"
+                                    formControlName="estadoAnimal" value="deprimido">
+                                <label class="form-check-label" for="estado.deprimido">Deprimido</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="estado.agressivo"
+                                    formControlName="estadoAnimal" value="agressivo">
+                                <label class="form-check-label" for="estado.agressivo">Agressivo</label>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Ferimentos: </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="ferimentos.n/a"
+                                    formControlName="ferimento" value="n/a">
+                                <label class="form-check-label" for="ferimentos.n/a">N/A</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="ferimento.leve"
+                                    formControlName="ferimento" value="leve">
+                                <label class="form-check-label" for="ferimento.leve">Leve</label>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="ferimento.medio"
+                                    formControlName="ferimento" value="medio">
+                                <label class="form-check-label" for="ferimento.medio">Médio</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="ferimento.grave"
+                                    formControlName="ferimento" value="grave">
+                                <label class="form-check-label" for="ferimento.grave">Grave</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>Dores: </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="dores.n/a" formControlName="dores"
+                                    value="n/a">
+                                <label class="form-check-label" for="dores.n/a">N/A</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="dores.moderada" formControlName="dores"
+                                    value="moderada">
+                                <label class="form-check-label" for="dores.moderada">Moderada</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="dores.intensa" formControlName="dores"
+                                    value="intensa">
+                                <label class="form-check-label" for="dores.intensa">Intensa</label>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Febre:
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="febre.n/a" formControlName="febre"
+                                    value="n/a">
+                                <label class="form-check-label" for="febre.n/a">N/A</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="febre.moderada" formControlName="febre"
+                                    value="moderada">
+                                <label class="form-check-label" for="febre.moderada">Moderada</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="febre.intensa" formControlName="febre"
+                                    value="intesa">
+                                <label class="form-check-label" for="febre.intensa">Intensa</label>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <po-textarea name="textarea" p-label="Queixa:" [p-rows]="4" [p-maxlength]="350"> </po-textarea>
+        <po-textarea name="textarea" p-label="Observação: " [p-maxlength]="200"> </po-textarea>
+        <po-textarea name="textarea" p-label="Procedimento: " [p-maxlength]="400"> </po-textarea>
+        <po-textarea name="textarea" p-label="Receita: " [p-rows]="10" [p-maxlength]="400"> </po-textarea>
+
+
+
+
+        <div class="row botoes">
+            <div class="coluna">
+                <button (click)="cancelar()" type="reset" class="btn btn-danger">
+                    <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                </button>
+            </div>
+            <div class="coluna">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
