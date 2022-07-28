@@ -1,0 +1,22 @@
+<po-page-list class="listaAnimal" p-title="Animais" [p-actions]="pageActions" [p-filter]="filterSettings">
+    <po-list-view p-property-title="name" [p-actions]="actions" [p-items]="animaisFiltrado">
+
+        <ng-template p-list-view-content-template let-item [p-title]="formatTitle">
+            <div class="po-row">
+                <po-info class="po-lg-4" p-label="Id Card" [p-value]="item.idCard"></po-info>
+
+                <po-info class="po-lg-4" p-label="Job description" [p-value]="item.jobDescription"></po-info>
+
+            </div>
+        </ng-template>
+
+        <ng-template p-list-view-detail-template let-item>
+            <div class="po-row">
+                <po-info class="po-md-6" p-label="Age" [p-value]="item.age"></po-info>
+
+                <po-info class="po-md-6" p-label="City" [p-value]="item.city"></po-info>
+            </div>
+        </ng-template>
+    </po-list-view>
+
+</po-page-list>

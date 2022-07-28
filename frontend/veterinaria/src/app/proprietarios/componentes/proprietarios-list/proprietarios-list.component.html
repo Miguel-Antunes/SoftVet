@@ -1,6 +1,6 @@
 <po-page-default [p-actions]="actions" [p-breadcrumb]="breadCrumb" p-title="Listagem de Proprietários">
 
-  <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="proprietarios">
+  <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="proprietarios" [p-actions-right]="true">
 
     <ng-template p-table-column-template p-property="cpf" let-value>
       <span [innerText]="value | cpfCnpj"></span>

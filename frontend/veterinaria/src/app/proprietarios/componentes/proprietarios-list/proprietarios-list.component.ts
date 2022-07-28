@@ -23,13 +23,24 @@ export class ProprietariosListComponent implements OnInit {
   actionsTable: PoTableAction[] = [
     {
       label: 'Alterar',
-      action: null
+      action: this.editar.bind(this)
     },
     {
       label: 'Excluir',
       action: null
+    },
+    {
+      label: 'Visualizar',
+      action: this.visualizar.bind(this)
     }
   ]
+
+  visualizar(proprietario: any): void {
+    this.router.navigate(['/proprietarios/view/' + proprietario.id])
+  }
+  editar(proprietario: any): void {
+    this.router.navigate(['/proprietarios/edit/' + proprietario.id])
+  }
 
   proprietarios: Proprietario[];
 

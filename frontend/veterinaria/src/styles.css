@@ -24,7 +24,7 @@
 
 .po-divider-label {
   font-size: 15px;
-  color: #0f1584;
+  color: var(--color-info-color-text-value);
 }
 
 .po-info-label {
@@ -36,7 +36,7 @@
 .po-info-value {
 
   font-size: 16px;
-  color: var(--color-info-color-text-value);
+  color: black;
 
 }
 

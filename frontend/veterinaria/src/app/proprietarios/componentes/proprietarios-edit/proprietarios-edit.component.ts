@@ -2,40 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BuscaCepService } from 'src/app/shared/services/busca-cep.service';
-import { VeterinariosService } from '../../services/veterinarios.service';
+import { ProprietarioService } from '../../services/proprietario.service';
 
 @Component({
-  selector: 'app-veterinarios-edit',
-  templateUrl: './veterinarios-edit.component.html',
-  styleUrls: ['./veterinarios-edit.component.css']
+  selector: 'app-proprietarios-edit',
+  templateUrl: './proprietarios-edit.component.html',
+  styleUrls: ['./proprietarios-edit.component.css']
 })
-export class VeterinariosEditComponent implements OnInit {
+export class ProprietariosEditComponent implements OnInit {
+
   formulario: FormGroup
   validacao_campo: boolean = false;
-  idVeterinario: number;
+  idProprietario: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private buscaCep: BuscaCepService,
-    private veterinarioService: VeterinariosService,
+    private proprietarioService: ProprietarioService,
     private route: ActivatedRoute
-
-    // private dataPipe: DataPipe,
-    // private phonePipe: PhonePipe,
-    // private cpfCnpj: CpfCnpjPipe,
-    // private cepPipe: CepPipe
   ) { }
 
   ngOnInit(): void {
-    this.pegarIdveterinario();
-    this.buscarVeterinario();
+    this.pegarIdProprietario();
+    this.buscarProprietario();
     this.configurarFormulario();
   }
   onSubmit(): void {
 
   }
-  pegarIdveterinario(): void {
-    this.idVeterinario = this.route.snapshot.params['id'];
+  pegarIdProprietario(): void {
+    this.idProprietario = this.route.snapshot.params['id'];
   }
 
   configurarFormulario() {
@@ -84,22 +80,9 @@ export class VeterinariosEditComponent implements OnInit {
   cancelar(): void {
 
   }
-  // buscarVeterinario(): void {
-  //   this.veterinarioService.recuperarPorId(this.idVeterinario).pipe(map(response => {
 
-  //     response.dataCadastro = this.dataPipe.transform(response.dataCadastro)
-  //     response.cep = this.cepPipe.transform(response.cep)
-  //     response.cpf = this.cpfCnpj.transform(response.cpf)
-  //     response.telefone = this.phonePipe.transform(response.telefone)
-  //     return response
-  //   })).subscribe((response) => {
-  //     this.aux = response;
-  //   })
-
-
-  // }
-  buscarVeterinario(): void {
-    this.veterinarioService.recuperarPorId(this.idVeterinario).subscribe(response => {
+  buscarProprietario(): void {
+    this.proprietarioService.recuperarPorId(this.idProprietario).subscribe(response => {
 
       this.formulario.patchValue({
         nome: response.nome,

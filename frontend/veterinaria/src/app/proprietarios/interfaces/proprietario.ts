@@ -1,14 +1,21 @@
+import { Animal } from "src/app/animais/interfaces/animal";
 import { Endereco } from "../../shared/interfaces/endereco";
 
-export class Proprietario{
+export class Proprietario {
     id: number;
     nome: string;
     cpf: string;
     sexo: string;
     dataNascimento: string;
     telefone: string;
-    endereco: Endereco = new Endereco();
+    cep: string;
+    cidade: string;
+    uf: string;
+    rua: string;
+    numero: string;
+    complemento: string;
     email: string;
-    dataCadastro!: string;
-    
+    dataCadastro: string;
+    animais: Animal[];
+
 }

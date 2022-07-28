@@ -23,7 +23,7 @@ export class VeterinariosListComponent implements OnInit {
   actionsTable: PoTableAction[] = [
     {
       label: 'Alterar',
-      action: null
+      action: this.editar.bind(this)
     },
     {
       label: 'Excluir',
@@ -37,6 +37,9 @@ export class VeterinariosListComponent implements OnInit {
 
   visualizar(value: any): void {
     this.router.navigate(['/veterinarios/view/', value.id])
+  }
+  editar(veterinario: any): void {
+    this.router.navigate(['/veterinarios/edit/' + veterinario.id])
   }
 
   veterinarios: Veterinario[];

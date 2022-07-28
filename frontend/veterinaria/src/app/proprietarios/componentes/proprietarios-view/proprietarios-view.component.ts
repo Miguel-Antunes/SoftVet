@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoDynamicViewField, PoPageAction } from '@po-ui/ng-components';
+import { PoDynamicViewField } from '@po-ui/ng-components';
 import { map } from 'rxjs';
-import { ConsultasService } from 'src/app/consultas/services/consultas.service';
+import { AnimaisService } from 'src/app/animais/services/animais.service';
 import { CepPipe } from 'src/app/shared/pipes/cep.pipe';
 import { CpfCnpjPipe } from 'src/app/shared/pipes/cpfCnpj.pipe';
 import { DataPipe } from 'src/app/shared/pipes/data.pipe';
 import { PhonePipe } from 'src/app/shared/pipes/phone.pipe';
-import { Veterinario } from '../../interfaces/veterinario';
-import { VeterinariosService } from '../../services/veterinarios.service';
+import { Proprietario } from '../../interfaces/proprietario';
+import { ProprietarioService } from '../../services/proprietario.service';
+
+
 
 @Component({
-  selector: 'app-veterinarios-view',
+  selector: 'app-proprietarios-view',
   providers: [CpfCnpjPipe, DataPipe, PhonePipe, CepPipe],
-  templateUrl: './veterinarios-view.component.html',
-  styleUrls: ['./veterinarios-view.component.css']
+  templateUrl: './proprietarios-view.component.html',
+  styleUrls: ['./proprietarios-view.component.css']
 })
-export class VeterinariosViewComponent implements OnInit {
+export class ProprietariosViewComponent implements OnInit {
 
   campo: Array<PoDynamicViewField> = [
-    { property: 'nome', label: 'Nome', divider: 'Dados Pessoais', gridColumns: 4, order: 1 },
+    { property: 'nome', label: 'Nome', divider: 'Dados Pessoais', gridColumns: 4, order: 1, },
     { property: 'dataNascimento', label: 'Nascimento', gridColumns: 4 },
     { property: 'sexo', label: 'Sexo', gridColumns: 4 },
     { property: 'cpf', label: 'CPF', gridColumns: 4, order: 2 },
     { property: 'telefone', label: 'Celular', gridColumns: 4, order: 3 },
-    { property: 'dataCadastro', label: 'Data de Admissão', gridColumns: 4, divider: 'Dados Profissionais' },
-    { property: 'totalConsulta', label: 'Consultas Realizadas', gridColumns: 4 },
+    { property: 'dataCadastro', label: 'Data de Cadastro', gridColumns: 4, divider: 'Dados do Sistema' },
     { property: 'cidade', label: 'Cidade', divider: 'Endereço', gridColumns: 4 },
     { property: 'uf', label: 'UF', gridColumns: 4 },
     { property: 'cep', label: 'CEP', gridColumns: 4 },
@@ -33,13 +34,13 @@ export class VeterinariosViewComponent implements OnInit {
     { property: 'numero', label: 'Numero', gridColumns: 4 },
     { property: 'complemento', label: 'Complemento', gridColumns: 4 }
   ];
-  veterinario: Veterinario;
+  proprietario: Proprietario
   aux: any;
-  idVeterinario: number;
+  idProprietario: number;
 
   constructor(
-    private veterinarioService: VeterinariosService,
-    private consultaService: ConsultasService,
+    private proprietarioService: ProprietarioService,
+    private animalService: AnimaisService,
     private cpfCnpj: CpfCnpjPipe,
     private dataPipe: DataPipe,
     private phonePipe: PhonePipe,
@@ -50,45 +51,44 @@ export class VeterinariosViewComponent implements OnInit {
 
 
   editar(): void {
-    this.router.navigate(['/veterinarios/edit/' + this.veterinario.id])
+    this.router.navigate(['/proprietarios/edit/' + this.proprietario.id])
+  }
+  visualizarAnimais(): void {
+    this.router.navigate(['/proprietarios/view/animais/' + this.idProprietario])
   }
 
   ngOnInit(): void {
-    this.pegarIdVeterinario();
-    this.buscarVeterinario();
+    this.pegarIdProproetario();
+    this.buscarProprietario();
+
   }
 
-  buscarVeterinario(): void {
-    this.veterinarioService.recuperarPorId(this.idVeterinario).pipe(map(response => {
+  buscarProprietario(): void {
+    this.proprietarioService.recuperarPorId(this.idProprietario).pipe(map(response => {
       response.dataCadastro = this.dataPipe.transform(response.dataCadastro)
-      response.dataNascimento = this.dataPipe.transform(response.dataNascimento)
       response.cep = this.cepPipe.transform(response.cep)
       response.cpf = this.cpfCnpj.transform(response.cpf)
       response.telefone = this.phonePipe.transform(response.telefone)
       if (response.sexo) {
         response.sexo = response.sexo.toString().toUpperCase()
       }
+
       return response
     })).subscribe((response) => {
       this.aux = response;
-      this.recuperarConsultasPorVeterinario();
+      this.proprietario = {
+        ...this.aux
+      }
     })
 
 
   }
-  recuperarConsultasPorVeterinario(): void {
-    this.consultaService.recuperarConsulataPorVeterinario(this.idVeterinario).subscribe(response => {
-      this.veterinario = {
-        ...this.aux,
-        totalConsulta: response.length
-      }
-    }
+  recuperarAnimais() {
 
+  }
+  pegarIdProproetario(): void {
+    this.idProprietario = this.route.snapshot.params['id'];
+  }
 
-    )
-  }
-  pegarIdVeterinario(): void {
-    this.idVeterinario = this.route.snapshot.params['id'];
-  }
 
 }
