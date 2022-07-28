@@ -24,4 +24,10 @@ export class AnimaisService {
     return this.http.get<Animal>(this.apiUrl + "/" + id);
   }
 
+  recuperarAnimalPorProprietario(idProprietario: any): Observable<Animal[]> {
+
+    return this.http.get<Animal[]>(this.apiUrl + "/proprietario/" + idProprietario);
+
+  }
+
 }

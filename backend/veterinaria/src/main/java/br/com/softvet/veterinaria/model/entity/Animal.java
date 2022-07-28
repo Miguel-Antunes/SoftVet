@@ -30,7 +30,7 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_proprietario")
@@ -72,6 +72,7 @@ public class Animal {
 	@Column(name= "data_cadastro", updatable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataCadastro;
+	
 	
 	
 	@PrePersist 

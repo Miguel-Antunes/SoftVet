@@ -8,5 +8,8 @@ import br.com.softvet.veterinaria.model.entity.Consulta;
 
 public interface ConsultasRepository extends JpaRepository<Consulta, Long> {
 	List<Consulta> findByIdVeterinario(Long idVeterinario);
+	List<Consulta> findByIdAnimal(Long idAnimal);
+	
+
 
 }

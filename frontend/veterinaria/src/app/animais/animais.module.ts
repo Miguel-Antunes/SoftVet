@@ -6,12 +6,18 @@ import { AnimaisFormComponent } from './componentes/animais-form/animais-form.co
 import { AnimaisListComponent } from './componentes/animais-list/animais-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PoFieldModule, PoModule } from '@po-ui/ng-components';
+import { AnimaisViewComponent } from './componentes/animais-view/animais-view.component';
+import { AnimaisEditComponent } from './componentes/animais-edit/animais-edit.component';
+import { AnimaisViewProntuarioComponent } from './componentes/animais-view-prontuario/animais-view-prontuario.component';
 
 
 @NgModule({
   declarations: [
     AnimaisFormComponent,
-    AnimaisListComponent
+    AnimaisListComponent,
+    AnimaisViewComponent,
+    AnimaisEditComponent,
+    AnimaisViewProntuarioComponent
   ],
   imports: [
     CommonModule,

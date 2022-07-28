@@ -1,22 +1,47 @@
-<po-page-list class="listaAnimal" p-title="Animais" [p-actions]="pageActions" [p-filter]="filterSettings">
-    <po-list-view p-property-title="name" [p-actions]="actions" [p-items]="animaisFiltrado">
+<div class="container ">
 
-        <ng-template p-list-view-content-template let-item [p-title]="formatTitle">
-            <div class="po-row">
-                <po-info class="po-lg-4" p-label="Id Card" [p-value]="item.idCard"></po-info>
+    <po-page-list class="po-pt-4" p-title="Animais" [p-actions]="pageActions" [p-filter]="filterSettings">
 
-                <po-info class="po-lg-4" p-label="Job description" [p-value]="item.jobDescription"></po-info>
 
-            </div>
-        </ng-template>
 
-        <ng-template p-list-view-detail-template let-item>
-            <div class="po-row">
-                <po-info class="po-md-6" p-label="Age" [p-value]="item.age"></po-info>
+        <div class="col-md-6 mt-4 ">
+            <po-list-view [p-actions]="actions" [p-items]="animaisFiltrado">
 
-                <po-info class="po-md-6" p-label="City" [p-value]="item.city"></po-info>
-            </div>
-        </ng-template>
-    </po-list-view>
+                <ng-template p-list-view-content-template let-item [p-title]="formatTitle">
 
-</po-page-list>
+                    <div class="row">
+
+                        <po-info class="col-md-6 text-break" p-label="Espécie" [p-value]="item.especie"></po-info>
+
+                        <po-info class="col-md-6 text-break" p-label="Raça" [p-value]="item.raca"></po-info>
+
+
+                    </div>
+                </ng-template>
+
+                <ng-template p-list-view-detail-template let-item>
+                    <div class="row">
+                        <po-info class="col-md-6 text-break" p-label="Idade" [p-value]="item.age"></po-info>
+
+                        <po-info class="col-md-6 text-break" p-label="Sexo" [p-value]="item.city"></po-info>
+                    </div>
+                    <div class="row">
+                        <po-info class="col-md-6 text-break" p-label="Cor" [p-value]="item.cor"></po-info>
+
+                        <po-info class="col-md-6 text-break" p-label="Altura" [p-value]="item.altura"></po-info>
+                    </div>
+                    <div class="row">
+                        <po-info class="col-md-6 text-break" p-label="Peso" [p-value]="item.peso"></po-info>
+
+                        <po-info class="col-md-6 text-break" p-label="Tipo Sanguíneo" [p-value]="item.tipoSanque">
+                        </po-info>
+                    </div>
+                </ng-template>
+            </po-list-view>
+        </div>
+
+
+
+    </po-page-list>
+
+</div>

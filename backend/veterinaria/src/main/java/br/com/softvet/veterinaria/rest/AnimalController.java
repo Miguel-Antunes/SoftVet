@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.softvet.veterinaria.model.entity.Animal;
+
 import br.com.softvet.veterinaria.model.repository.AnimalRepository;
+import br.com.softvet.veterinaria.model.repository.ProprietarioRepository;
 
 @RestController
 @RequestMapping("/api/animais")
@@ -26,6 +28,9 @@ public class AnimalController {
 	
 	@Autowired
 	private AnimalRepository repository;
+	
+	@Autowired
+	private ProprietarioRepository proprietarioRepository;
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -40,13 +45,19 @@ public class AnimalController {
 	}
 	
 	@GetMapping("{id}")
-	public Animal recuperarPorId(@PathVariable Integer id) {
+	public Animal recuperarPorId(@PathVariable Long id) {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+	
+	@GetMapping("/proprietario/{id}")
+	public List<Animal> recuperarAnimalPorProprietario(@PathVariable Long id){
+		return repository.findByProprietario(proprietarioRepository.findById(id).get());
+		
 	}
 	
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Integer id) {
+	public void deletar(@PathVariable Long id) {
 		repository
 			.findById(id).map( animal -> {
 				repository.delete(animal);
@@ -58,7 +69,7 @@ public class AnimalController {
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable Integer id, @RequestBody Animal animalAtualizado) {
+	public void update(@PathVariable Long id, @RequestBody Animal animalAtualizado) {
 		repository
 		.findById(id)
 		.map(animal -> { 

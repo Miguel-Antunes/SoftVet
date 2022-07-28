@@ -38,13 +38,13 @@ public class ProprietarioController {
 	}
 	
 	@GetMapping("{id}")
-	public Proprietario recuperarporId(@PathVariable Integer id) {
+	public Proprietario recuperarporId(@PathVariable Long id) {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Integer id) {
+	public void deletar(@PathVariable Long id) {
 		repository.findById(id).map(propreietario -> {
 			repository.delete(propreietario);
 			return Void.TYPE;
@@ -54,7 +54,7 @@ public class ProprietarioController {
 
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable Integer id, @RequestBody Proprietario proprietarioAtualizado) {
+	public void update(@PathVariable Long id, @RequestBody Proprietario proprietarioAtualizado) {
 		repository.findById(id).map(proprietario -> {
 			proprietario.setNome(proprietarioAtualizado.getNome());
 			proprietario.setCpf(proprietarioAtualizado.getCpf());

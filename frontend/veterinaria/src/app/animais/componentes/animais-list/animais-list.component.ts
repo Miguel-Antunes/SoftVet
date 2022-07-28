@@ -27,10 +27,14 @@ export class AnimaisListComponent implements OnInit {
       action: null
     },
     {
-      label: 'Excluir',
-      action: null
+      label: 'Visualizar',
+      action: this.visualizarAnimal.bind(this)
     }
   ]
+
+  visualizarAnimal(animal: any): void {
+    this.router.navigate(['/animais/view/' + animal.id])
+  }
 
   animais: Animal[];
 

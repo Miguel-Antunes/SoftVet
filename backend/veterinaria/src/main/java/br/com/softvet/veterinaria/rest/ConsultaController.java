@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,6 +50,13 @@ public class ConsultaController {
 	public List<Consulta> recuperarConsultasPorVeterinario(@PathVariable Long id){
 		return repository.findByIdVeterinario(id);
 	}
+	@GetMapping("/animal/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Consulta> recuperarConsultasPorAnimal(@PathVariable Long id){
+		return repository.findByIdAnimal(id);
+	}
+	
+	
 	
 	
 	

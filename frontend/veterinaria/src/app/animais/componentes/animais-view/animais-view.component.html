@@ -1,0 +1,17 @@
+<div class="container">
+    <po-page-default p-title="Animais">
+        <po-dynamic-view [p-fields]="campo" [p-value]="animal">
+
+        </po-dynamic-view>
+        <div class="row text-right mt-5">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-lg btn-secondary mr-5" (click)="visualizarProntuario()">Visualizar
+                    Prontuário</button>
+
+                <button type="button" class="btn btn-lg btn-secondary mr-5" (click)="editar()">Editar</button>
+
+            </div>
+        </div>
+    </po-page-default>
+
+</div>

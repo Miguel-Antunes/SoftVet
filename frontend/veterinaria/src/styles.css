@@ -29,14 +29,30 @@
 
 .po-info-label {
   font-size: 15px;
-  color: #0a1199;
+  color: rgb(5, 10, 98);
 
 }
 
 .po-info-value {
 
   font-size: 16px;
-  color: black;
+  color: #6c757d;
+
+}
+
+.po-list-view-detail-button,
+.po-list-view-more-actions {
+  color: rgb(5, 10, 98);
+}
+
+
+.po-page-header-title {
+  color: rgb(5, 10, 98);
+}
+
+.po-list-view {
+  background-color: rgba(211, 211, 211, 0.164);
+  border-color: rgba(211, 211, 211, 0.164);
 
 }
 

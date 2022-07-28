@@ -1,0 +1,50 @@
+<div class="container ">
+
+    <po-page-list class="po-pt-4" p-title="Consultas" [p-actions]="pageActions" [p-filter]="filterSettings">
+
+
+
+        <div class="col-md-6">
+            <po-list-view [p-actions]="actions" [p-items]="consultasFiltradas">
+
+                <ng-template p-list-view-content-template let-item [p-title]="formatarTitulo">
+
+                    <div class="row">
+                        <div class="col-md-5 text-break">
+                            <po-info p-label="Data Realizada" [p-value]="item.dataRealizacao">
+                            </po-info>
+                        </div>
+                        <div class="col-md-5 text-break">
+                            <po-info p-label="Veterinario" [p-value]="item.nomeVeterinario">
+                            </po-info>
+                        </div>
+
+                    </div>
+
+
+                </ng-template>
+
+                <ng-template p-list-view-detail-template let-item>
+
+                    <div class="row">
+                        <div class="col-md-12 text-break">
+                            <po-info p-label="Queixa" [p-value]="item.queixa">
+                            </po-info>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" class="btn btn-sm btn-primary mr-3">Visualizar Consulta</button>
+                        </div>
+                    </div>
+
+
+                </ng-template>
+            </po-list-view>
+        </div>
+
+    </po-page-list>
+
+</div>

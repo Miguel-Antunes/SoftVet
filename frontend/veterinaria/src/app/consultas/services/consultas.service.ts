@@ -12,7 +12,12 @@ export class ConsultasService {
   constructor(private http: HttpClient) { }
 
   apiUrl = environment.apiURLBase + "/api/consultas"
-  recuperarConsulataPorVeterinario(id: number): Observable<Consulta[]>{
-    return this.http.get<Consulta[]>('http://localhost:8080/api/consultas/veterinario/' + id)
+  recuperarConsulataPorVeterinario(idVeterinario: number): Observable<Consulta[]> {
+    return this.http.get<Consulta[]>(this.apiUrl + '/veterinario/' + idVeterinario)
+  }
+
+  recuperarConsultaPorAnimal(idAnimal: number): Observable<Consulta[]> {
+    return this.http.get<Consulta[]>(this.apiUrl + '/animal/' + idAnimal)
+
   }
 }
