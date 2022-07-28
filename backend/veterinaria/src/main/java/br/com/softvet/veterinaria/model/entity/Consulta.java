@@ -51,10 +51,7 @@ public class Consulta {
 		
 	@Column()
 	private String receita;
-	
-	@Column(nullable = false)
-	private String situacao;
-	
+	@Column	
 	private LocalDate dataRealizacao;
 	
 	@PrePersist

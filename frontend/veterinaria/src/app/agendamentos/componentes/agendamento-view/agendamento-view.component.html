@@ -9,8 +9,6 @@
         </div>
     </div>
 
-
-
     <ol class="breadcrumb ">
         <li class="breadcrumb-item active">Calendário</li>
     </ol>
@@ -20,7 +18,7 @@
         <div class="col">
             <div class="text-left mt-3 mb-4 mr-4">
                 <div class="novo-agendamento">
-                    <div class="btn btn-outline-secondary" (click)="setTitle()">
+                    <div class="btn btn-outline-secondary" (click)="modal.open()">
                         Novo Agendamento
                     </div>
                 </div>
@@ -29,8 +27,6 @@
         </div>
 
     </div>
-
-
 
 
     <div class=" row text-center">
@@ -91,26 +87,14 @@
 
 </div>
 
-
 <po-modal #modal>
 
     <div class="container">
-        <div class="novo-anendamento mb-4" *ngIf="editarCadastrar">
-            <h2>Cadastrar Agendamento</h2>
-        </div>
-        <div class="novo-anendamento mb-4" *ngIf="visualizar">
-            <h2>Visualizar Agendamento</h2>
-        </div>
-        <div class="novo-anendamento mb-4" *ngIf="editarCadastrar">
-            <h2>Editar Agendamento</h2>
-        </div>
 
 
         <div class="container">
 
-
-
-            <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
 
                 <div class="po-row">
@@ -122,25 +106,22 @@
 
                 <div class="po-row">
                     <div class="po-md-6">
-                        <po-combo formControlName="animal" p-label="Animal: *" [p-disabled]="visualizar"
-                            [p-options]="animais"></po-combo>
+                        <po-combo formControlName="animal" p-label="Animal: *" [p-clean]="true">
+                        </po-combo>
                     </div>
                     <div class="po-md-6">
-                        <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-disabled]="visualizar"
-                            [p-options]="veterinarios">
+                        <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-clean]="true">
                         </po-combo>
                     </div>
                 </div>
 
                 <div class="po-row">
                     <div class="po-md-6">
-                        <po-combo formControlName="prioridade" p-label="Selecione a prioridade"
-                            [p-disabled]="visualizar" [p-options]="opcoes">
+                        <po-combo formControlName="prioridade" p-label="Selecione a prioridade" [p-clean]="true">
                         </po-combo>
                     </div>
                     <div class="po-md-6">
-                        <po-datepicker formControlName="dataRealizacao" p-disabled="{{visualizar}}"
-                            p-label="Data de Realização: *">
+                        <po-datepicker formControlName="dataRealizacao" p-label="Data de Realização: *">
                         </po-datepicker>
                     </div>
 
@@ -148,11 +129,11 @@
                 <po-modal-footer [p-disabled-align]="false">
 
 
-                    <button type="reset" class="btn btn-danger mr-2" *ngIf="!visualizar">
+                    <button type="reset" class="btn btn-danger mr-2" (click)="cancelar()">
                         <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
                     </button>
 
-                    <button type="submit" class="btn btn-success" *ngIf="!visualizar">
+                    <button type="submit" class="btn btn-success">
                         <i class="fa fa-save"></i> Salvar
                     </button>
                 </po-modal-footer>

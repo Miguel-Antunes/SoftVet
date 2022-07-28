@@ -5,6 +5,7 @@ import { PhonePipe } from './pipes/phone.pipe';
 import { DataPipe } from './pipes/data.pipe';
 import { AuthService } from './services/auth.service';
 import { BuscaCepService } from './services/busca-cep.service';
+import { CepPipe } from './pipes/cep.pipe';
 
 
 
@@ -12,7 +13,8 @@ import { BuscaCepService } from './services/busca-cep.service';
   declarations: [
     CpfCnpjPipe,
     PhonePipe,
-    DataPipe
+    DataPipe,
+    CepPipe
   ],
   imports: [
     CommonModule,

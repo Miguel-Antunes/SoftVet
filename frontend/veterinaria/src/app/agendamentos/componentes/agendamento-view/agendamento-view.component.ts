@@ -1,8 +1,9 @@
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PoModalComponent } from '@po-ui/ng-components';
+import { Router } from '@angular/router';
+import { PoModalComponent, PoNotificationService } from '@po-ui/ng-components';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -13,11 +14,13 @@ import {
   isSameDay,
   isSameMonth, startOfDay
 } from 'date-fns';
+
+
+
 import { map, Subject } from 'rxjs';
 import { AgendamentosService } from 'src/app/agendamentos/services/agendamentos.service';
-
-
-
+import { AnimaisService } from 'src/app/animais/services/animais.service';
+import { VeterinariosService } from 'src/app/veterinarios/services/veterinarios.service';
 
 const colors: any = {
   red: {
@@ -33,33 +36,30 @@ const colors: any = {
     secondary: '#FDF1BA',
   },
 };
-
-
 @Component({
-  selector: 'app-calendario',
+  selector: 'app-agendamento-view',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './calendario.component.html',
-  styleUrls: ['./calendario.component.css']
+  templateUrl: './agendamento-view.component.html',
+  styleUrls: ['./agendamento-view.component.css']
 })
-export class CalendarioComponent implements OnInit {
+export class AgendamentoViewComponent implements OnInit {
 
-  visualizar: boolean = false;
-  editarCadastrar: boolean = false;
+  constructor(
+    private formBuilder: FormBuilder,
+    private agendamentoService: AgendamentosService,
+    private animalService: AnimaisService,
+    private veterinarioService: VeterinariosService,
+    private notificationService: PoNotificationService,
+    private router: Router
+  ) { }
 
+  ngOnInit(): void {
+    this.configurarFormulario();
+    this.popularCalendario();
+  }
   formulario: FormGroup;
 
-  agendamentos: any;
-
-  @Input()
-  animais: any[];
-
-  @Input()
-  veterinarios: any[];
-
-  @Output()
-  conteudoFormulario: EventEmitter<any> = new EventEmitter();
-
-  // @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @Output() eventEmiter = new EventEmitter();
 
   view: CalendarView = CalendarView.Month;
 
@@ -68,15 +68,7 @@ export class CalendarioComponent implements OnInit {
   viewDate: Date = new Date();
 
 
-
   @ViewChild("modal", { static: true }) modal: PoModalComponent
-
-  opcoes: any = [
-    { label: " Baixa", value: "baixa" },
-    { label: " Moderada", value: "moderada" },
-    { label: "Alta", value: "alta" }
-
-  ]
 
   modalData: {
     action: string;
@@ -89,22 +81,7 @@ export class CalendarioComponent implements OnInit {
       label: '<span class="ml-1"> <i class="fas fa-fw fa-pencil-alt"></i> </span>',
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.visualizar = false;
-        this.editarCadastrar = true;
-        this.formulario.get("descricao").enable();
-
-        this.agendamentoService.recuperarPorId(<number>event.id).subscribe((response) => {
-          this.formulario.patchValue({
-            id: response.id,
-            descricao: response.descricao,
-            animal: response.animal,
-            veterinario: response.veterinario,
-            prioridade: response.prioridade,
-            dataRealizacao: response.dataRealizacao
-          })
-          this.modal.open();
-
-        })
+        this.router.navigate(['/agendamentos/edit/' + event.id])
 
       },
     },
@@ -117,8 +94,6 @@ export class CalendarioComponent implements OnInit {
           this.agendamentoService.deletar(<number>event.id).subscribe((response) => {
 
           })
-          location.reload();
-
         }
 
       },
@@ -150,18 +125,6 @@ export class CalendarioComponent implements OnInit {
   events: CalendarEvent[];
 
   activeDayIsOpen: boolean = false;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private agendamentoService: AgendamentosService
-  ) { }
-
-  ngOnInit(): void {
-    this.configurarFormulario();
-    this.recuperarAgendamentos();
-    console.log(this.modal)
-
-  }
 
 
   configurarFormulario(): void {
@@ -213,7 +176,6 @@ export class CalendarioComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.visualizar = true;
     this.agendamentoService.recuperarPorId(<number>event.id).subscribe((response) => {
       this.formulario.patchValue({
         id: response.id,
@@ -224,14 +186,8 @@ export class CalendarioComponent implements OnInit {
         dataRealizacao: response.dataRealizacao
 
       })
-
-      this.formulario.get("descricao").disable();
       this.modal.open();
-
-
     })
-
-
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -246,7 +202,7 @@ export class CalendarioComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  recuperarAgendamentos() {
+  popularCalendario() {
     return this.agendamentoService.recuperarTodos()
       .pipe(
         map(
@@ -257,7 +213,7 @@ export class CalendarioComponent implements OnInit {
                 title: agendamento.descricao,
                 start: startOfDay(new Date(`${agendamento.dataRealizacao} 00:00`)),
                 color: agendamento.prioridade == 'baixa' ? colors.blue : agendamento.prioridade == 'moderada' ? colors.yellow : colors.red,
-                actions: this.actions,
+                actions: this.actions
               }
             })
           }
@@ -268,20 +224,11 @@ export class CalendarioComponent implements OnInit {
         this.refresh.next();
       })
   }
-  setTitle(): void {
 
-    this.editarCadastrar = true;
-    this.visualizar = false;
-    this.modal.open();
-
+  onSubmit() {
+  }
+  cancelar(): void {
+    this.modal.close()
 
   }
-  cadastrar(): void {
-    this.modal.onXClosed
-    this.conteudoFormulario.emit(this.formulario);
-  }
-
-
 }
-
-

@@ -26,6 +26,7 @@ import { PrimeiroAcessoComponent } from './primeiro-acesso/componentes/primeiro-
 import { PrimeiroAcessoModule } from './primeiro-acesso/primeiro-acesso.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

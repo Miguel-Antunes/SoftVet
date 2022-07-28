@@ -1,14 +1,14 @@
 package br.com.softvet.veterinaria.model.entity;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
 
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -32,9 +32,7 @@ public class Medicamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToMany(mappedBy = "medicamentos")
-	private List<Consulta> consulta;
-	
+
 	@Column(nullable = false, length= 50)
 	@NotEmpty(message = "{campo.descricao.medicamento.obrigatorio}")
 	private String descricao;

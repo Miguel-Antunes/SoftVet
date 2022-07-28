@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CalendarioComponent } from '../calendario/componentes/calendario/calendario.component';
+import { LayoutComponent } from '../layout/componentes/layout/layout.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
-import { AgendamentosFormComponent } from './componentes/agendamentos-form/agendamentos-form.component';
+import { AgendamentoEditComponent } from './componentes/agendamento-edit/agendamento-edit.component';
+import { AgendamentoViewComponent } from './componentes/agendamento-view/agendamento-view.component';
 import { AgendamentosListComponent } from './componentes/agendamentos-list/agendamentos-list.component';
+
+
 
 const routes: Routes = [
   {
-    path: 'agendamentos', component: CalendarioComponent, canActivate: [AuthGuard], children: [
-      { path: 'form', component: AgendamentosFormComponent },
-      { path: 'list', component: AgendamentosListComponent },
-      { path: '', redirectTo: '/agendamentos/list', pathMatch: 'full' }
-    ]
-  }
+    path: 'agendamentos', component: LayoutComponent, canActivate: [AuthGuard], children: [
 
-];
+      { path: 'view', component: AgendamentoViewComponent },
+      { path: 'list', component: AgendamentosListComponent },
+      { path: 'edit/:id', component: AgendamentoEditComponent },
+      { path: '', redirectTo: '/agendamentos/view', pathMatch: 'full' }
+
+
+    ]
+
+  }
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

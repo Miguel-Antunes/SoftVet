@@ -42,13 +42,13 @@ public class VeterinarioController {
 	}
 	
 	@GetMapping("{id}")
-	public Veterinario recuperarPorId(@PathVariable Integer id) {
+	public Veterinario recuperarPorId(@PathVariable Long id) {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Veterinário não Encontrado!"));
 	}
 	
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Integer id) {
+	public void deletar(@PathVariable Long id) {
 		repository
 			.findById(id).map( veterinario -> {
 				repository.delete(veterinario);
@@ -60,7 +60,7 @@ public class VeterinarioController {
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable Integer id, @RequestBody Veterinario veterinarioAtualizado) {
+	public void update(@PathVariable Long id, @RequestBody Veterinario veterinarioAtualizado) {
 		repository
 		.findById(id)
 		.map(veterinario -> { 

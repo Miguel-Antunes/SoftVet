@@ -1,27 +1,44 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { ReactiveFormsModule } from '@angular/forms';
-import { PoModule } from '@po-ui/ng-components';
-import { CalendarioModule } from '../calendario/calendario.module';
-import { SharedModule } from '../shared/shared.module';
 import { AgendamentosRoutingModule } from './agendamentos-routing.module';
-import { AgendamentosFormComponent } from './componentes/agendamentos-form/agendamentos-form.component';
 import { AgendamentosListComponent } from './componentes/agendamentos-list/agendamentos-list.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { LOCALE_ID } from '@angular/core';
+import { PoModule } from '@po-ui/ng-components';
+import { SharedModule } from '../shared/shared.module';
+import { AgendamentoEditComponent } from './componentes/agendamento-edit/agendamento-edit.component';
+import { AgendamentoViewComponent } from './componentes/agendamento-view/agendamento-view.component';
+
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
-    AgendamentosFormComponent,
-    AgendamentosListComponent
+    AgendamentosListComponent,
+    AgendamentoEditComponent,
+    AgendamentoViewComponent
   ],
   imports: [
     CommonModule,
     AgendamentosRoutingModule,
-    CalendarioModule,
+    FormsModule,
     PoModule,
+    SharedModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     ReactiveFormsModule,
-    SharedModule
+  ],
+  exports: [AgendamentoViewComponent],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
 })
 export class AgendamentosModule { }

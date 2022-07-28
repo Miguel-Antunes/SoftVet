@@ -23,5 +23,9 @@ export class VeterinariosService {
     return this.http.get<Veterinario[]>(this.apiURL);
 
   }
+  recuperarPorId(id: number): Observable<Veterinario> {
+    return this.http.get<Veterinario>(this.apiURL + "/" + id)
+  }
+
 
 }

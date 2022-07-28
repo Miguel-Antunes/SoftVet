@@ -28,8 +28,16 @@ export class VeterinariosListComponent implements OnInit {
     {
       label: 'Excluir',
       action: null
+    },
+    {
+      label: 'Visualizar',
+      action: this.visualizar.bind(this)
     }
   ]
+
+  visualizar(value: any): void {
+    this.router.navigate(['/veterinarios/view/', value.id])
+  }
 
   veterinarios: Veterinario[];
 

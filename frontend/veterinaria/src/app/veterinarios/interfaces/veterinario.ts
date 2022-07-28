@@ -1,14 +1,20 @@
 import { Endereco } from "../../shared/interfaces/endereco";
 
-export class Veterinario{
+export class Veterinario {
     id: number;
     nome: string;
     cpf: string;
     sexo: string;
     dataNascimento: string;
     telefone: string;
-    endereco: Endereco = new Endereco();
+    cep: string;
+    cidade: string;
+    uf: string;
+    rua: string;
+    numero: string;
+    complemento: string;
     email: string;
     dataCadastro!: string;
-    
+    totalConsulta: number;
+
 }

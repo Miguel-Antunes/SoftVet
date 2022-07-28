@@ -17,11 +17,28 @@
 
 
 
+
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.po-divider-label {
+  font-size: 15px;
+  color: #0f1584;
+}
 
+.po-info-label {
+  font-size: 15px;
+  color: #0a1199;
+
+}
+
+.po-info-value {
+
+  font-size: 16px;
+  color: var(--color-info-color-text-value);
+
+}
 
 .cal-month-view .cal-day-cell.cal-today {
   background-color: #5d646a52;
