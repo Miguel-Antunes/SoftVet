@@ -15,7 +15,7 @@
                             </po-info>
                         </div>
                         <div class="col-md-5 text-break">
-                            <po-info p-label="Veterinario" [p-value]="item.nomeVeterinario">
+                            <po-info p-label="Veterinario" [p-value]="item.veterinario.nome">
                             </po-info>
                         </div>
 
@@ -36,7 +36,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-right">
-                            <button type="button" class="btn btn-sm btn-primary mr-3">Visualizar Consulta</button>
+                            <button type="button" class="btn btn-sm btn-primary mr-3"
+                                (click)="visualizarProntuario(item.id)">Mais detalhes</button>
                         </div>
                     </div>
 

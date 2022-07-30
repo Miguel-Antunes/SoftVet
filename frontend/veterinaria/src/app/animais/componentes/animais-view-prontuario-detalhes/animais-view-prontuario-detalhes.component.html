@@ -1,0 +1,33 @@
+<div class="container pb-5 pt-4">
+    <po-dynamic-view [p-fields]="campos" [p-value]="consulta"> </po-dynamic-view>
+    <div class="row">
+        <div class="col-md-12">
+            <label class="po-info-label" for="">Queixa</label>
+            <po-textarea [p-rows]="5" [ngModel]="queixa" [p-disabled]="true"> </po-textarea>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label class="po-info-label" for="">Observação</label>
+            <po-textarea [p-rows]="5" [ngModel]="observacao" [p-disabled]="true"> </po-textarea>
+        </div>
+
+    </div>
+
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <label class="po-info-label" for="">Procedimentos Realizados</label>
+            <po-textarea [p-rows]="10" [ngModel]="procedimentoRealizado" [p-disabled]="true"> </po-textarea>
+        </div>
+        <div class="col-md-6">
+            <label class="po-info-label" for="">Receita</label>
+            <po-textarea [p-rows]="10" [ngModel]="receita" [p-disabled]="true"> </po-textarea>
+        </div>
+    </div>
+    <div class="pb-5">
+
+    </div>
+
+</div>

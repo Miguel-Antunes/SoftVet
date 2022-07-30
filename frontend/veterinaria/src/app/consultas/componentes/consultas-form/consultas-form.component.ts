@@ -37,7 +37,7 @@ export class ConsultasFormComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       animal: [null],
       veterinario: [null],
-      dataAgendamento: ["26/07/2022 11:30"],
+      dataAgendamento: [],
       estadoAnimal: [null],
       ferimento: [null],
       dores: [null],
@@ -46,7 +46,7 @@ export class ConsultasFormComponent implements OnInit {
       observacao: [null],
       procedimento: [null],
       receita: [null],
-      situacao: ["pendente"]
+      situacao: []
     })
   }
   onSubmit(): void {

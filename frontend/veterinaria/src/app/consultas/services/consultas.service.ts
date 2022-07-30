@@ -20,4 +20,8 @@ export class ConsultasService {
     return this.http.get<Consulta[]>(this.apiUrl + '/animal/' + idAnimal)
 
   }
+  recuperarPorId(idConsulta: number): Observable<Consulta> {
+    return this.http.get<Consulta>(this.apiUrl + "/" + idConsulta)
+  }
+
 }

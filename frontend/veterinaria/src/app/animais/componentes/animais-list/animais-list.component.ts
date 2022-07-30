@@ -29,9 +29,15 @@ export class AnimaisListComponent implements OnInit {
     {
       label: 'Visualizar',
       action: this.visualizarAnimal.bind(this)
+    },
+    {
+      label: 'Visualizar Prontuário',
+      action: this.visualizarProntuario.bind(this)
     }
   ]
-
+  visualizarProntuario(animal: any): void {
+    this.router.navigate(['/animais/view/prontuario/' + animal.id])
+  }
   visualizarAnimal(animal: any): void {
     this.router.navigate(['/animais/view/' + animal.id])
   }
@@ -48,12 +54,18 @@ export class AnimaisListComponent implements OnInit {
     {
       property: 'nome',
       label: 'Nome',
-      width: '25%'
+      width: '20%'
     },
     {
       property: 'proprietario.nome',
       label: 'Nome do Proprietário',
-      width: '15%'
+      width: '20%'
+    },
+    {
+      property: 'especie',
+      label: 'Espécie',
+      width: '20%'
+
     },
     {
       property: 'raca',
@@ -61,10 +73,11 @@ export class AnimaisListComponent implements OnInit {
       width: '20%'
 
     },
+
     {
       property: 'cor',
       label: 'Cor',
-      width: '30%'
+      width: '15%'
     }
   ];
 

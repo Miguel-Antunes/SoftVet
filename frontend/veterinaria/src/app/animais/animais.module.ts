@@ -9,6 +9,8 @@ import { PoFieldModule, PoModule } from '@po-ui/ng-components';
 import { AnimaisViewComponent } from './componentes/animais-view/animais-view.component';
 import { AnimaisEditComponent } from './componentes/animais-edit/animais-edit.component';
 import { AnimaisViewProntuarioComponent } from './componentes/animais-view-prontuario/animais-view-prontuario.component';
+import { AnimaisViewProntuarioDetalhesComponent } from './componentes/animais-view-prontuario-detalhes/animais-view-prontuario-detalhes.component';
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { AnimaisViewProntuarioComponent } from './componentes/animais-view-pront
     AnimaisListComponent,
     AnimaisViewComponent,
     AnimaisEditComponent,
-    AnimaisViewProntuarioComponent
+    AnimaisViewProntuarioComponent,
+    AnimaisViewProntuarioDetalhesComponent
   ],
   imports: [
     CommonModule,

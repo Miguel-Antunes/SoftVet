@@ -24,6 +24,8 @@ import { BuscaCepService } from './shared/services/busca-cep.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { PrimeiroAcessoComponent } from './primeiro-acesso/componentes/primeiro-acesso/primeiro-acesso.component';
 import { PrimeiroAcessoModule } from './primeiro-acesso/primeiro-acesso.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PoModule } from '@po-ui/ng-components';
 
 
 
@@ -34,6 +36,8 @@ import { PrimeiroAcessoModule } from './primeiro-acesso/primeiro-acesso.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    PoModule,
     HttpClientModule,
     AppRoutingModule,
     LayoutModule,

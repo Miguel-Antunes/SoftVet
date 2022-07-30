@@ -17,46 +17,55 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.softvet.veterinaria.model.entity.Consulta;
+import br.com.softvet.veterinaria.model.repository.AnimalRepository;
 import br.com.softvet.veterinaria.model.repository.ConsultasRepository;
+import br.com.softvet.veterinaria.model.repository.VeterinarioRepository;
 
 @RestController
 @RequestMapping("/api/consultas")
 public class ConsultaController {
 	
 	@Autowired
-	private ConsultasRepository repository;
+	private ConsultasRepository consultaRepository;
+	
+	@Autowired
+	private VeterinarioRepository veterinarioRepository;
+	
+	@Autowired
+	private AnimalRepository animalRepository;
+	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Consulta cadastrar(@RequestBody Consulta consulta) {
-		return repository.save(consulta);
+		return consultaRepository.save(consulta);
 		
 	}
 	
 	@GetMapping("{id}")
-	@ResponseStatus(HttpStatus.FOUND)
+	@ResponseStatus(HttpStatus.OK)
 	public Consulta encontrarPorId(@PathVariable Long id){
-		return repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		return consultaRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 	
 	@GetMapping
-	@ResponseStatus(HttpStatus.FOUND)
+	@ResponseStatus(HttpStatus.OK)
 	public List<Consulta> encontrarTodos(){
-		return repository.findAll();
+		return consultaRepository.findAll();
 		
 	}
 	@GetMapping("/veterinario/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Consulta> recuperarConsultasPorVeterinario(@PathVariable Long id){
-		return repository.findByIdVeterinario(id);
+		return consultaRepository.findByVeterinario(veterinarioRepository.findById(id).get());
+		
 	}
+	
 	@GetMapping("/animal/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<Consulta> recuperarConsultasPorAnimal(@PathVariable Long id){
-		return repository.findByIdAnimal(id);
+	public List<Consulta> recuperarConsultaPorAnimal(@PathVariable Long id){
+		return consultaRepository.findByAnimal(animalRepository.findById(id).get());
 	}
-	
-	
 	
 	
 	

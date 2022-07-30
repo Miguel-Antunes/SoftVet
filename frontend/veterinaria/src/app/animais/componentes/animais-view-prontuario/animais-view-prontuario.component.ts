@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PoListViewAction, PoPageAction, PoPageFilter } from '@po-ui/ng-components';
+import { map } from 'rxjs';
 import { ConsultasService } from 'src/app/consultas/services/consultas.service';
 
 
@@ -16,6 +17,7 @@ export class AnimaisViewProntuarioComponent implements OnInit {
 
     private route: ActivatedRoute,
     private consultaService: ConsultasService,
+    private router: Router
 
   ) { }
 
@@ -23,11 +25,10 @@ export class AnimaisViewProntuarioComponent implements OnInit {
     this.idAnimal = this.route.snapshot.params['id']
   }
 
-
-
   recuperarConsultasPorAnimal(): void {
     this.consultaService.recuperarConsultaPorAnimal(this.idAnimal).
       subscribe(response => {
+        console.log(response)
         this.consultas = response;
       })
 
@@ -53,6 +54,8 @@ export class AnimaisViewProntuarioComponent implements OnInit {
   modalDetail: boolean = false;
   selectedActionItem = {};
   idAnimal: number;
+
+
   readonly actions: Array<PoListViewAction> = [];
 
   readonly pageActions: Array<PoPageAction> = [
@@ -64,7 +67,7 @@ export class AnimaisViewProntuarioComponent implements OnInit {
     placeholder: 'Pesquisar'
   };
   formatarTitulo(item) {
-    return item.nomeAnimal;
+    return item.animal.nome;
   }
 
 
@@ -78,6 +81,9 @@ export class AnimaisViewProntuarioComponent implements OnInit {
 
   private includeFilter(item, filters) {
     return filters.some(filter => String(item).toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
+  }
+  visualizarProntuario(idConsulta: number): void {
+    this.router.navigate(['/animais/view/prontuario/detalhes/' + idConsulta])
   }
 
 }

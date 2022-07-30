@@ -32,9 +32,15 @@ export class ProprietariosListComponent implements OnInit {
     {
       label: 'Visualizar',
       action: this.visualizar.bind(this)
+    },
+    {
+      label: 'Visualizar Animais',
+      action: this.visualizarAnimais.bind(this)
     }
   ]
-
+  visualizarAnimais(proprietario: any): void {
+    this.router.navigate(['/proprietarios/view/animais/' + proprietario.id])
+  }
   visualizar(proprietario: any): void {
     this.router.navigate(['/proprietarios/view/' + proprietario.id])
   }

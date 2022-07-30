@@ -66,6 +66,7 @@ export class ProprietariosViewComponent implements OnInit {
   buscarProprietario(): void {
     this.proprietarioService.recuperarPorId(this.idProprietario).pipe(map(response => {
       response.dataCadastro = this.dataPipe.transform(response.dataCadastro)
+      response.dataNascimento = this.dataPipe.transform(response.dataNascimento)
       response.cep = this.cepPipe.transform(response.cep)
       response.cpf = this.cpfCnpj.transform(response.cpf)
       response.telefone = this.phonePipe.transform(response.telefone)
