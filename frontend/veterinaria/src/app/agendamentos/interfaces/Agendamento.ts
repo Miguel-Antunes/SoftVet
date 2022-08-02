@@ -6,7 +6,7 @@ export class Agendamento {
     descricao: string;
     veterinario: Veterinario = new Veterinario();
     animal: Animal = new Animal();
-    prioridade: string;
+    prioridade: any;
     dataAgendada: string;
     dataRealizacao: string;
 }

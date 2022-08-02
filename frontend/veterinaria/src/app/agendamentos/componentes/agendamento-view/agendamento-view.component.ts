@@ -1,9 +1,8 @@
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild
+  ChangeDetectionStrategy, Component, OnInit
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PoModalComponent, PoNotificationService } from '@po-ui/ng-components';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -19,8 +18,6 @@ import {
 
 import { map, Subject } from 'rxjs';
 import { AgendamentosService } from 'src/app/agendamentos/services/agendamentos.service';
-import { AnimaisService } from 'src/app/animais/services/animais.service';
-import { VeterinariosService } from 'src/app/veterinarios/services/veterinarios.service';
 
 const colors: any = {
   red: {
@@ -47,9 +44,6 @@ export class AgendamentoViewComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private agendamentoService: AgendamentosService,
-    private animalService: AnimaisService,
-    private veterinarioService: VeterinariosService,
-    private notificationService: PoNotificationService,
     private router: Router
   ) { }
 
@@ -57,9 +51,15 @@ export class AgendamentoViewComponent implements OnInit {
     this.configurarFormulario();
     this.popularCalendario();
   }
-  formulario: FormGroup;
 
-  @Output() eventEmiter = new EventEmitter();
+  formulario: FormGroup;
+  animais: any[];
+  veterinarios: any[];
+  prioridade: any = [
+    { label: " Baixa", value: "baixa" },
+    { label: " Moderada", value: "moderada" },
+    { label: "Alta", value: "alta" },
+  ]
 
   view: CalendarView = CalendarView.Month;
 
@@ -67,13 +67,11 @@ export class AgendamentoViewComponent implements OnInit {
 
   viewDate: Date = new Date();
 
+  refresh = new Subject<void>();
 
-  @ViewChild("modal", { static: true }) modal: PoModalComponent
+  events: CalendarEvent[];
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
+  activeDayIsOpen: boolean = false;
 
   actions: CalendarEventAction[] = [
 
@@ -92,44 +90,18 @@ export class AgendamentoViewComponent implements OnInit {
 
         if (confirm("Deseja excluir o agendamento " + event.title + "?")) {
           this.agendamentoService.deletar(<number>event.id).subscribe((response) => {
-
+            location.reload();
           })
         }
 
       },
     },
 
-    {
-      label: '<span class="ml-1"> <i class="fas fa-arrow-right"></i> </span>',
-      a11yLabel: 'consulta',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-
-        this.agendamentoService.recuperarPorId(<number>event.id).subscribe((response) => {
-          this.formulario.patchValue({
-            id: response.id,
-            descricao: response.descricao,
-            animal: response.animal,
-            veterinario: response.veterinario,
-            prioridade: response.prioridade,
-            dataRealizacao: response.dataRealizacao
-          })
-          this.modal.open();
-        })
-
-      },
-    }
   ];
-
-  refresh = new Subject<void>();
-
-  events: CalendarEvent[];
-
-  activeDayIsOpen: boolean = false;
 
 
   configurarFormulario(): void {
     this.formulario = this.formBuilder.group({
-      id: [null],
       descricao: [null, [Validators.required, Validators.maxLength(40)]],
       animal: [null, Validators.required],
       veterinario: [null],
@@ -150,8 +122,6 @@ export class AgendamentoViewComponent implements OnInit {
         this.activeDayIsOpen = true;
       }
       this.viewDate = date;
-
-
     }
 
   }
@@ -176,18 +146,7 @@ export class AgendamentoViewComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.agendamentoService.recuperarPorId(<number>event.id).subscribe((response) => {
-      this.formulario.patchValue({
-        id: response.id,
-        descricao: response.descricao,
-        animal: response.animal,
-        veterinario: response.veterinario,
-        prioridade: response.prioridade,
-        dataRealizacao: response.dataRealizacao
-
-      })
-      this.modal.open();
-    })
+    this.router.navigate(['/agendamentos/detalhe/' + event.id])
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -225,10 +184,8 @@ export class AgendamentoViewComponent implements OnInit {
       })
   }
 
-  onSubmit() {
+  cadastrarAgendamento(): void {
+    this.router.navigate(['/agendamentos/form'])
   }
-  cancelar(): void {
-    this.modal.close()
 
-  }
 }

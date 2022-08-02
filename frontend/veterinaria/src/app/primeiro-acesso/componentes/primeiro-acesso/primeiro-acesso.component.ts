@@ -116,7 +116,7 @@ export class PrimeiroAcessoComponent implements OnInit {
 
 
           this.primeiroAcessoSerice.registrarSenha(this.clone.id, this.clone).subscribe(response => {
-            this.poNotification.setDefaultDuration(3000);
+            this.poNotification.setDefaultDuration(2000);
             this.poNotification.success("Senha registrada com sucesso! ")
 
             setTimeout(() => {

@@ -5,7 +5,7 @@ import { AuthGuard } from '../shared/guards/auth.guard';
 import { AnimaisEditComponent } from './componentes/animais-edit/animais-edit.component';
 import { AnimaisFormComponent } from './componentes/animais-form/animais-form.component';
 import { AnimaisListComponent } from './componentes/animais-list/animais-list.component';
-import { AnimaisViewProntuarioDetalhesComponent } from './componentes/animais-view-prontuario-detalhes/animais-view-prontuario-detalhes.component';
+
 
 import { AnimaisViewProntuarioComponent } from './componentes/animais-view-prontuario/animais-view-prontuario.component';
 import { AnimaisViewComponent } from './componentes/animais-view/animais-view.component';
@@ -18,7 +18,6 @@ const routes: Routes = [
       { path: 'view/:id', component: AnimaisViewComponent },
       { path: 'view/prontuario/:id', component: AnimaisViewProntuarioComponent },
       { path: 'edit/:id', component: AnimaisEditComponent },
-      { path: 'view/prontuario/detalhes/:id', component: AnimaisViewProntuarioDetalhesComponent },
       { path: '', redirectTo: '/animais/list', pathMatch: 'full' }
     ]
   }

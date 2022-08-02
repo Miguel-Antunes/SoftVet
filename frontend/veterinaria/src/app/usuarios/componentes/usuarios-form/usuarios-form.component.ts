@@ -63,7 +63,7 @@ export class UsuariosFormComponent implements OnInit {
       })
       setTimeout(() => {
         this.service.cadastrar(this.formulario.value).subscribe((response) => {
-          this.poNotification.setDefaultDuration(3000);
+          this.poNotification.setDefaultDuration(2000);
           this.poNotification.success("Usuário Cadastrado com sucesso!");
           location.reload()
 
@@ -72,7 +72,7 @@ export class UsuariosFormComponent implements OnInit {
           (responseErro) => {
 
             console.log(responseErro)
-            this.poNotification.setDefaultDuration(3000);
+            this.poNotification.setDefaultDuration(2000);
             this.poNotification.warning("Nome de Usuario já cadastrado!");
 
           })

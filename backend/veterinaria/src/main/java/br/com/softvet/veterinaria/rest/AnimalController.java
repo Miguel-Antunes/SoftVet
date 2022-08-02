@@ -54,18 +54,7 @@ public class AnimalController {
 		return repository.findByProprietario(proprietarioRepository.findById(id).get());
 		
 	}
-	
-	@DeleteMapping("{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Long id) {
-		repository
-			.findById(id).map( animal -> {
-				repository.delete(animal);
-				return Void.TYPE;
-			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-		
-	}
+
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
@@ -73,6 +62,7 @@ public class AnimalController {
 		repository
 		.findById(id)
 		.map(animal -> { 
+			animal.setProprietario(animalAtualizado.getProprietario());
 			animal.setNome(animalAtualizado.getNome());
 			animal.setIdade(animalAtualizado.getIdade());
 			animal.setSexo(animalAtualizado.getSexo());

@@ -83,6 +83,10 @@ public class Veterinario {
 	@Column(length = 50)
 	private String complemento;
 	
+	@Column(length = 10)
+	private String situacao;
+	
+	
 	@PrePersist 
 	public void prePersist() {
 		setDataCadastro(LocalDate.now());

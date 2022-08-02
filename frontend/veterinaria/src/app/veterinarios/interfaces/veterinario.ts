@@ -16,5 +16,6 @@ export class Veterinario {
     email: string;
     dataCadastro!: string;
     totalConsulta: number;
+    situacao: string;
 
 }

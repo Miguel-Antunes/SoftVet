@@ -45,7 +45,7 @@ export class MedicamentosFormComponent implements OnInit {
       this.formulario.get(campo).markAsDirty();
     }
     if (!this.formulario.valid) {
-      this.notificationService.setDefaultDuration(4000);
+      this.notificationService.setDefaultDuration(2000);
       this.notificationService.warning('Preencha os campos obrigatórios!');
     } else {
       this.service.cadastrar(this.formulario.value).subscribe((response) => {

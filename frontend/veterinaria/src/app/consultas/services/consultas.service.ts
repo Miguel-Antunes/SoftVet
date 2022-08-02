@@ -23,5 +23,7 @@ export class ConsultasService {
   recuperarPorId(idConsulta: number): Observable<Consulta> {
     return this.http.get<Consulta>(this.apiUrl + "/" + idConsulta)
   }
-
+  recuperarTodas(): Observable<Consulta[]> {
+    return this.http.get<Consulta[]>(this.apiUrl)
+  }
 }

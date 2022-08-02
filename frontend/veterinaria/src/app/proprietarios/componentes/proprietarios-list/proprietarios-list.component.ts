@@ -11,6 +11,20 @@ import { ProprietarioService } from '../../services/proprietario.service';
 })
 export class ProprietariosListComponent implements OnInit {
 
+  proprietarios: Proprietario[];
+
+
+  constructor(
+    public router: Router,
+    public activatedRoute: ActivatedRoute,
+    private proprietarioService: ProprietarioService,
+
+  ) { }
+
+  ngOnInit(): void {
+    this.recuperarVeterinarios();
+  }
+
   breadCrumb: PoBreadcrumb = {
     items: [{ label: 'Listagem de Proprietários', link: 'proprietarios/list' }]
   }
@@ -26,10 +40,6 @@ export class ProprietariosListComponent implements OnInit {
       action: this.editar.bind(this)
     },
     {
-      label: 'Excluir',
-      action: null
-    },
-    {
       label: 'Visualizar',
       action: this.visualizar.bind(this)
     },
@@ -38,18 +48,6 @@ export class ProprietariosListComponent implements OnInit {
       action: this.visualizarAnimais.bind(this)
     }
   ]
-  visualizarAnimais(proprietario: any): void {
-    this.router.navigate(['/proprietarios/view/animais/' + proprietario.id])
-  }
-  visualizar(proprietario: any): void {
-    this.router.navigate(['/proprietarios/view/' + proprietario.id])
-  }
-  editar(proprietario: any): void {
-    this.router.navigate(['/proprietarios/edit/' + proprietario.id])
-  }
-
-  proprietarios: Proprietario[];
-
   readonly columns: PoTableColumn[] = [
     {
       property: 'id',
@@ -82,20 +80,23 @@ export class ProprietariosListComponent implements OnInit {
     }
   ];
 
-  constructor(public router: Router, public activatedRoute: ActivatedRoute, private proprietarioService: ProprietarioService) { }
-
-  ngOnInit(): void {
-
-    this.proprietarioService.recuperarTodos().subscribe(response => {
-      this.proprietarios = response;
-    })
-
+  visualizarAnimais(proprietario: any): void {
+    this.router.navigate(['/proprietarios/view/animais/' + proprietario.id])
   }
-  mostrarDados(): any {
+  visualizar(proprietario: any): void {
+    this.router.navigate(['/proprietarios/view/' + proprietario.id])
   }
-
+  editar(proprietario: any): void {
+    this.router.navigate(['/proprietarios/edit/' + proprietario.id])
+  }
   registrarProprietario() {
     this.router.navigate(['proprietarios/form'])
   }
 
+
+  recuperarVeterinarios(): void {
+    this.proprietarioService.recuperarTodos().subscribe(response => {
+      this.proprietarios = response;
+    })
+  }
 }

@@ -12,8 +12,9 @@ import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID } from '@angular/core';
 import { PoModule } from '@po-ui/ng-components';
 import { SharedModule } from '../shared/shared.module';
-import { AgendamentoEditComponent } from './componentes/agendamento-edit/agendamento-edit.component';
 import { AgendamentoViewComponent } from './componentes/agendamento-view/agendamento-view.component';
+import { AgendamentoFormComponent } from './componentes/agendamento-form/agendamento-form.component';
+import { AgendamentoDetalheComponent } from './componentes/agendamento-detalhe/agendamento-detalhe.component';
 
 
 registerLocaleData(localePt);
@@ -21,8 +22,9 @@ registerLocaleData(localePt);
 @NgModule({
   declarations: [
     AgendamentosListComponent,
-    AgendamentoEditComponent,
-    AgendamentoViewComponent
+    AgendamentoViewComponent,
+    AgendamentoFormComponent,
+    AgendamentoDetalheComponent
   ],
   imports: [
     CommonModule,

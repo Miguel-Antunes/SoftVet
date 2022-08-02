@@ -1,0 +1,18 @@
+.po-combo-item {
+    color: blue;
+}
+
+.btn {
+    width: 110px;
+    height: 40px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: right;
+
+}
+
+.coluna {
+    width: 130px;
+}

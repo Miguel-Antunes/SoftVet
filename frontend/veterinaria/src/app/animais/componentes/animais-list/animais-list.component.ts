@@ -24,7 +24,7 @@ export class AnimaisListComponent implements OnInit {
   actionsTable: PoTableAction[] = [
     {
       label: 'Alterar',
-      action: null
+      action: this.editar.bind(this)
     },
     {
       label: 'Visualizar',
@@ -35,6 +35,10 @@ export class AnimaisListComponent implements OnInit {
       action: this.visualizarProntuario.bind(this)
     }
   ]
+  editar(animal: any): void {
+    this.router.navigate(['/animais/edit/' + animal.id])
+  }
+
   visualizarProntuario(animal: any): void {
     this.router.navigate(['/animais/view/prontuario/' + animal.id])
   }
@@ -91,14 +95,8 @@ export class AnimaisListComponent implements OnInit {
 
 
   }
-  mostrarDados(): any {
-  }
 
   registrarAnimal() {
     this.router.navigate(['animais/form'])
-  }
-
-  teste() {
-    console.log(this.animais)
   }
 }

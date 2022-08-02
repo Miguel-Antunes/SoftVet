@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PoDynamicViewField } from '@po-ui/ng-components';
-import { ConsultasService } from 'src/app/consultas/services/consultas.service';
+import { map } from 'rxjs';
+import { DataPipe } from 'src/app/shared/pipes/data.pipe';
+import { ConsultasService } from '../../services/consultas.service';
 
 @Component({
-  selector: 'app-animais-view-prontuario-detalhes',
-  templateUrl: './animais-view-prontuario-detalhes.component.html',
-  styleUrls: ['./animais-view-prontuario-detalhes.component.css']
+  selector: 'app-consultas-view',
+  providers: [DataPipe],
+  templateUrl: './consultas-view.component.html',
+  styleUrls: ['./consultas-view.component.css']
 })
-export class AnimaisViewProntuarioDetalhesComponent implements OnInit {
+export class ConsultasViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private consultaService: ConsultasService
+    private consultaService: ConsultasService,
+    private dataPipe: DataPipe
   ) { }
 
   formulario: FormGroup;
@@ -28,7 +32,12 @@ export class AnimaisViewProntuarioDetalhesComponent implements OnInit {
 
   }
   recuperarConsulta() {
-    this.consultaService.recuperarPorId(this.idConsulta)
+    this.consultaService.recuperarPorId(this.idConsulta).pipe(map(response => {
+
+      response.dataRealizacao = this.dataPipe.transform(response.dataRealizacao)
+
+      return response;
+    }))
       .subscribe(response => {
         console.log(response)
         this.consulta = {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PoNotificationService } from '@po-ui/ng-components';
 import { BuscaCepService } from 'src/app/shared/services/busca-cep.service';
 import { VeterinariosService } from '../../services/veterinarios.service';
 
@@ -18,7 +19,9 @@ export class VeterinariosEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private buscaCep: BuscaCepService,
     private veterinarioService: VeterinariosService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificationService: PoNotificationService,
+    private router: Router
 
     // private dataPipe: DataPipe,
     // private phonePipe: PhonePipe,
@@ -31,9 +34,7 @@ export class VeterinariosEditComponent implements OnInit {
     this.buscarVeterinario();
     this.configurarFormulario();
   }
-  onSubmit(): void {
 
-  }
   pegarIdveterinario(): void {
     this.idVeterinario = this.route.snapshot.params['id'];
   }
@@ -81,26 +82,8 @@ export class VeterinariosEditComponent implements OnInit {
     valor = this.formulario.get(campo).value.replace(/[0-9]/g, '');
     this.formulario.get(campo).setValue(valor);
   }
-  cancelar(): void {
-
-  }
-  // buscarVeterinario(): void {
-  //   this.veterinarioService.recuperarPorId(this.idVeterinario).pipe(map(response => {
-
-  //     response.dataCadastro = this.dataPipe.transform(response.dataCadastro)
-  //     response.cep = this.cepPipe.transform(response.cep)
-  //     response.cpf = this.cpfCnpj.transform(response.cpf)
-  //     response.telefone = this.phonePipe.transform(response.telefone)
-  //     return response
-  //   })).subscribe((response) => {
-  //     this.aux = response;
-  //   })
-
-
-  // }
   buscarVeterinario(): void {
     this.veterinarioService.recuperarPorId(this.idVeterinario).subscribe(response => {
-
       this.formulario.patchValue({
         nome: response.nome,
         cpf: response.cpf,
@@ -118,5 +101,36 @@ export class VeterinariosEditComponent implements OnInit {
       )
     })
   }
+
+  onSubmit(): void {
+    for (const campo in this.formulario.value) {
+      this.formulario.get(campo).markAsDirty();
+    }
+    if (!this.formulario.valid) {
+      this.notificationService.setDefaultDuration(2000);
+      this.notificationService.warning('Preencha os campos obrigatórios!');
+    } else {
+      this.veterinarioService.editar(this.idVeterinario, this.formulario.value).subscribe((response) => {
+        this.notificationService.setDefaultDuration(2000);
+        this.notificationService.success("Editado com sucesso!");
+        this.router.navigate(['veterinarios/list']);
+        console.log(response);
+      }, (responseErro) => {
+
+        this.formulario.get('cpf').setErrors({ incorrect: true });
+        this.notificationService.setDefaultDuration(2000);
+        this.notificationService.warning("CPF está inválido");
+
+      }
+      )
+    }
+
+  }
+  cancelar(): void {
+    this.router.navigate(['/veterinarios/list'])
+
+  }
+
+
 
 }

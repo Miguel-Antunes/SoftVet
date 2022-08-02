@@ -14,14 +14,19 @@ export class ProprietarioService {
   }
   apiUrl = environment.apiURLBase + '/api/proprietarios'
   cadastrar(proprietario: Proprietario): Observable<Proprietario> {
-    return this.http.post<Proprietario>('http://localhost:8080/api/proprietarios', proprietario);
+    return this.http.post<Proprietario>(this.apiUrl, proprietario);
   }
 
   recuperarTodos(): Observable<Proprietario[]> {
-    return this.http.get<Proprietario[]>('http://localhost:8080/api/proprietarios');
+    return this.http.get<Proprietario[]>(this.apiUrl);
 
   }
   recuperarPorId(id: number): Observable<Proprietario> {
     return this.http.get<Proprietario>(this.apiUrl + '/' + id)
   }
+  editar(id: number, proprietario: Proprietario): Observable<Proprietario> {
+    return this.http.put<Proprietario>(this.apiUrl + "/" + id, proprietario);
+  }
+
+
 }

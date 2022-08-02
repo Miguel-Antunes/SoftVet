@@ -1,0 +1,56 @@
+<h1 class="mt-4">Agendamentos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Detalhes</li>
+</ol>
+<div class="container mt-5">
+
+    <form [formGroup]="formulario">
+
+
+        <div class="po-row">
+            <div class="po-md-6">
+                <po-input formControlName="descricao" p-label="Descrição do evento:" p-disabled="true"></po-input>
+            </div>
+
+        </div>
+
+        <div class="po-row">
+            <div class="po-md-6">
+                <po-combo formControlName="animal" p-label="Animal: *" [p-options]="animais" [p-disabled]="true">
+                </po-combo>
+            </div>
+            <div class="po-md-6">
+                <po-combo formControlName="veterinario" [p-options]="veterinarios" p-label="Veterinário: "
+                    [p-disabled]="true">
+                </po-combo>
+            </div>
+        </div>
+
+        <div class="po-row">
+            <div class="po-md-6">
+                <po-combo formControlName="prioridade" p-label="Selecione a prioridade" [p-options]="prioridade "
+                    [p-disabled]="true">
+                </po-combo>
+            </div>
+            <div class="po-md-6">
+                <po-datepicker formControlName="dataRealizacao" p-label="Data de Realização: *" p-disabled="true">
+                </po-datepicker>
+            </div>
+
+        </div>
+        <po-modal-footer [p-disabled-align]="false">
+
+
+            <button type="reset" class="btn btn-secondary mr-2" (click)="voltar()">
+                Voltar
+            </button>
+
+            <button type="submit" class="btn btn-secondary" (click)="consulta()">
+                Consulta
+            </button>
+        </po-modal-footer>
+
+
+
+    </form>
+</div>

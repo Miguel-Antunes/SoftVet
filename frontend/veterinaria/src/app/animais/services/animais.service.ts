@@ -14,10 +14,10 @@ export class AnimaisService {
   apiUrl = environment.apiURLBase + "/api/animais"
 
   cadastrar(animal: Animal): Observable<Animal> {
-    return this.http.post<Animal>('http://localhost:8080/api/animais', animal)
+    return this.http.post<Animal>(this.apiUrl, animal)
   }
   recuperarTodos(): Observable<Animal[]> {
-    return this.http.get<Animal[]>('http://localhost:8080/api/animais');
+    return this.http.get<Animal[]>(this.apiUrl);
   }
 
   recuperarPorId(id: number): Observable<Animal> {
@@ -28,6 +28,10 @@ export class AnimaisService {
 
     return this.http.get<Animal[]>(this.apiUrl + "/proprietario/" + idProprietario);
 
+  }
+
+  editar(id: number, animal: Animal): Observable<Animal> {
+    return this.http.put<Animal>(this.apiUrl + "/" + id, animal)
   }
 
 }

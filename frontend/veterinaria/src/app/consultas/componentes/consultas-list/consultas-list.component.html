@@ -1,1 +1,11 @@
-<p>consultas-list works!</p>
+<po-page-default [p-actions]="actions" [p-breadcrumb]="breadCrumb" p-title="Listagem de Animais">
+
+    <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="consultas" [p-actions-right]="true">
+
+        <ng-template p-table-column-template p-property="dataRealizacao" let-value>
+            <span [innerText]="value | data"></span>
+        </ng-template>
+    </po-table>
+
+</po-page-default>
+<router-outlet></router-outlet>

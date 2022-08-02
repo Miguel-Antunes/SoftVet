@@ -14,6 +14,7 @@ import { VeterinariosRoutingModule } from './veterinarios-routing.module';
 import { VeterinariosEditComponent } from './componentes/veterinarios-edit/veterinarios-edit.component';
 import { VeterinariosViewComponent } from './componentes/veterinarios-view/veterinarios-view.component';
 
+
 @NgModule({
   declarations: [
     VeterinariosFormComponent,
@@ -30,7 +31,6 @@ import { VeterinariosViewComponent } from './componentes/veterinarios-view/veter
     PoPageModule,
     BrowserAnimationsModule,
     SharedModule
-
   ]
 })
 export class VeterinariosModule { }

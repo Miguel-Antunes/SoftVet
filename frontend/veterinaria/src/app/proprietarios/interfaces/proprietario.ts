@@ -3,7 +3,7 @@ import { Endereco } from "../../shared/interfaces/endereco";
 
 export class Proprietario {
     id: number;
-    nome: string;
+    nome: any;
     cpf: string;
     sexo: string;
     dataNascimento: string;

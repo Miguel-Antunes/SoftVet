@@ -17,7 +17,7 @@ export class VeterinariosFormComponent implements OnInit {
   erros: any;
 
   constructor(
-    private service: VeterinariosService,
+    private veterinarioService: VeterinariosService,
     private formBuilder: FormBuilder,
     private buscacep: BuscaCepService,
     private notificationService: PoNotificationService,
@@ -28,7 +28,7 @@ export class VeterinariosFormComponent implements OnInit {
     this.configurarFormulario();
   }
 
-  configurarFormulario() {
+  configurarFormulario(): void {
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.maxLength(150)]],
       cpf: [null, [Validators.required, Validators.maxLength(11)]],
@@ -42,10 +42,11 @@ export class VeterinariosFormComponent implements OnInit {
       rua: [null, [Validators.required, Validators.maxLength(100)]],
       numero: [null, [Validators.required, Validators.maxLength(5)]],
       complemento: [null, Validators.maxLength(50)],
+      situacao: ["Ativo"]
     });
   }
 
-  buscaInfo() {
+  buscaInfo(): void {
     this.validacao_campo = false;
     let cep: string = this.formulario.get('cep').value;
     let validacao_cep: boolean = /^([0-9]{5}[0-9]{3})$/.test(cep);
@@ -68,32 +69,32 @@ export class VeterinariosFormComponent implements OnInit {
   }
 
   onSubmit() {
+
     for (const campo in this.formulario.value) {
       this.formulario.get(campo).markAsDirty();
     }
     if (!this.formulario.valid) {
-      this.notificationService.setDefaultDuration(4000);
+      this.notificationService.setDefaultDuration(2000);
       this.notificationService.warning('Preencha os campos obrigatórios!');
     } else {
-      this.service.cadastrar(this.formulario.value).subscribe((response) => {
+      this.veterinarioService.cadastrar(this.formulario.value).subscribe((response) => {
         this.notificationService.success("Cadastrado com sucesso!");
         this.router.navigate(['veterinarios/list']);
         console.log(response);
       }, (responseErro) => {
-        console.log(responseErro)
+        console.log(responseErro.error.errors)
         this.erros = responseErro.error.errors;
 
-        if (this.erros == 'CPF está inválido') {
-          this.formulario.get('cpf').setErrors({ incorrect: true });
-          this.notificationService.setDefaultDuration(4000);
-          this.notificationService.warning("CPF está inválido");
-        }
+        this.formulario.get('cpf').setErrors({ incorrect: true });
+        this.notificationService.setDefaultDuration(2000);
+        this.notificationService.warning("CPF está inválido");
+
       }
       )
     }
   }
 
-  removerNumeros(campo: string) {
+  removerNumeros(campo: string): void {
     let valor: string;
     valor = this.formulario.get(campo).value.replace(/[0-9]/g, '');
     this.formulario.get(campo).setValue(valor);
@@ -101,4 +102,5 @@ export class VeterinariosFormComponent implements OnInit {
   cancelar(): void {
     location.reload();
   }
+
 }

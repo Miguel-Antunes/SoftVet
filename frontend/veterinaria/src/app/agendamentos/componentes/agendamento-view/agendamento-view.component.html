@@ -18,7 +18,7 @@
         <div class="col">
             <div class="text-left mt-3 mb-4 mr-4">
                 <div class="novo-agendamento">
-                    <div class="btn btn-outline-secondary" (click)="modal.open()">
+                    <div class="btn btn-outline-secondary" (click)="cadastrarAgendamento()">
                         Novo Agendamento
                     </div>
                 </div>
@@ -36,14 +36,14 @@
             <div class="btn-group">
                 <div class="btn btn-outline-secondary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
                     (viewDateChange)="closeOpenMonthViewDay()">
-                    Previous
+                    Antes
                 </div>
                 <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
-                    Today
+                    Hoje
                 </div>
                 <div class="btn btn-outline-secondary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
                     (viewDateChange)="closeOpenMonthViewDay()">
-                    Next
+                    Depois
                 </div>
             </div>
         </div>
@@ -54,15 +54,15 @@
             <div class="btn-group">
                 <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Month)"
                     [class.active]="view === CalendarView.Month">
-                    Month
+                    Mês
                 </div>
                 <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Week)"
                     [class.active]="view === CalendarView.Week">
-                    Week
+                    Semana
                 </div>
                 <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Day)"
                     [class.active]="view === CalendarView.Day">
-                    Day
+                    Dia
                 </div>
             </div>
         </div>
@@ -86,62 +86,3 @@
     </div>
 
 </div>
-
-<po-modal #modal>
-
-    <div class="container">
-
-
-        <div class="container">
-
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-
-
-                <div class="po-row">
-                    <div class="po-md-6">
-                        <po-input formControlName="descricao" p-label="Descrição do evento:"></po-input>
-                    </div>
-
-                </div>
-
-                <div class="po-row">
-                    <div class="po-md-6">
-                        <po-combo formControlName="animal" p-label="Animal: *" [p-clean]="true">
-                        </po-combo>
-                    </div>
-                    <div class="po-md-6">
-                        <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-clean]="true">
-                        </po-combo>
-                    </div>
-                </div>
-
-                <div class="po-row">
-                    <div class="po-md-6">
-                        <po-combo formControlName="prioridade" p-label="Selecione a prioridade" [p-clean]="true">
-                        </po-combo>
-                    </div>
-                    <div class="po-md-6">
-                        <po-datepicker formControlName="dataRealizacao" p-label="Data de Realização: *">
-                        </po-datepicker>
-                    </div>
-
-                </div>
-                <po-modal-footer [p-disabled-align]="false">
-
-
-                    <button type="reset" class="btn btn-danger mr-2" (click)="cancelar()">
-                        <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
-                    </button>
-
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa fa-save"></i> Salvar
-                    </button>
-                </po-modal-footer>
-
-
-
-            </form>
-        </div>
-    </div>
-
-</po-modal>

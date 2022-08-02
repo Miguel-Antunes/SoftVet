@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PoNotificationService } from '@po-ui/ng-components';
 import { BuscaCepService } from 'src/app/shared/services/busca-cep.service';
 import { ProprietarioService } from '../../services/proprietario.service';
 
@@ -19,7 +20,9 @@ export class ProprietariosEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private buscaCep: BuscaCepService,
     private proprietarioService: ProprietarioService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificationService: PoNotificationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,9 +30,7 @@ export class ProprietariosEditComponent implements OnInit {
     this.buscarProprietario();
     this.configurarFormulario();
   }
-  onSubmit(): void {
 
-  }
   pegarIdProprietario(): void {
     this.idProprietario = this.route.snapshot.params['id'];
   }
@@ -49,6 +50,26 @@ export class ProprietariosEditComponent implements OnInit {
       numero: [null, [Validators.required, Validators.maxLength(5)]],
       complemento: [null, Validators.maxLength(50)],
     });
+  }
+  buscarProprietario(): void {
+    this.proprietarioService.recuperarPorId(this.idProprietario).subscribe(response => {
+
+      this.formulario.patchValue({
+        nome: response.nome,
+        cpf: response.cpf,
+        telefone: response.telefone,
+        dataNascimento: response.dataNascimento,
+        email: response.email,
+        sexo: response.sexo,
+        cep: response.cep,
+        uf: response.uf,
+        cidade: response.uf,
+        rua: response.rua,
+        numero: response.numero,
+        complemento: response.numero,
+      }
+      )
+    })
   }
 
   buscaInfo() {
@@ -77,29 +98,34 @@ export class ProprietariosEditComponent implements OnInit {
     valor = this.formulario.get(campo).value.replace(/[0-9]/g, '');
     this.formulario.get(campo).setValue(valor);
   }
-  cancelar(): void {
+  onSubmit(): void {
+    for (const campo in this.formulario.value) {
+      this.formulario.get(campo).markAsDirty();
+    }
+    if (!this.formulario.valid) {
+      this.notificationService.setDefaultDuration(2000);
+      this.notificationService.warning('Preencha os campos obrigatórios!');
+    } else {
+      this.proprietarioService.editar(this.idProprietario, this.formulario.value).subscribe((response) => {
+        this.notificationService.setDefaultDuration(2000);
+        this.notificationService.success("Editado com sucesso!");
+        this.router.navigate(['proprietarios/list']);
+        console.log(response);
+      }, (responseErro) => {
 
-  }
+        this.formulario.get('cpf').setErrors({ incorrect: true });
+        this.notificationService.setDefaultDuration(2000);
+        this.notificationService.warning("CPF está inválido");
 
-  buscarProprietario(): void {
-    this.proprietarioService.recuperarPorId(this.idProprietario).subscribe(response => {
-
-      this.formulario.patchValue({
-        nome: response.nome,
-        cpf: response.cpf,
-        telefone: response.telefone,
-        dataNascimento: response.dataNascimento,
-        email: response.email,
-        sexo: response.sexo,
-        cep: response.cep,
-        uf: response.uf,
-        cidade: response.uf,
-        rua: response.rua,
-        numero: response.numero,
-        complemento: response.numero,
       }
       )
-    })
+    }
+
   }
+  cancelar(): void {
+    this.router.navigate(['/proprietarios/list'])
+  }
+
+
 
 }

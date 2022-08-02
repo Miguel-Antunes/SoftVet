@@ -3,10 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PoListViewAction, PoPageAction, PoPageFilter } from '@po-ui/ng-components';
 import { map } from 'rxjs';
 import { ConsultasService } from 'src/app/consultas/services/consultas.service';
+import { DataPipe } from 'src/app/shared/pipes/data.pipe';
 
 
 @Component({
   selector: 'app-animais-view-prontuario',
+  providers: [DataPipe],
   templateUrl: './animais-view-prontuario.component.html',
   styleUrls: ['./animais-view-prontuario.component.css']
 })
@@ -17,6 +19,7 @@ export class AnimaisViewProntuarioComponent implements OnInit {
 
     private route: ActivatedRoute,
     private consultaService: ConsultasService,
+    private dataPipe: DataPipe,
     private router: Router
 
   ) { }
@@ -26,7 +29,12 @@ export class AnimaisViewProntuarioComponent implements OnInit {
   }
 
   recuperarConsultasPorAnimal(): void {
-    this.consultaService.recuperarConsultaPorAnimal(this.idAnimal).
+    this.consultaService.recuperarConsultaPorAnimal(this.idAnimal).pipe(map(response => {
+      response.map(consulta => {
+        consulta.dataRealizacao = this.dataPipe.transform(consulta.dataRealizacao)
+      })
+      return response;
+    })).
       subscribe(response => {
         console.log(response)
         this.consultas = response;
@@ -83,7 +91,7 @@ export class AnimaisViewProntuarioComponent implements OnInit {
     return filters.some(filter => String(item).toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
   }
   visualizarProntuario(idConsulta: number): void {
-    this.router.navigate(['/animais/view/prontuario/detalhes/' + idConsulta])
+    this.router.navigate(['/consultas/view/' + idConsulta])
   }
 
 }

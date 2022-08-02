@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,17 +46,7 @@ public class VeterinarioController {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Veterinário não Encontrado!"));
 	}
 	
-	@DeleteMapping("{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Long id) {
-		repository
-			.findById(id).map( veterinario -> {
-				repository.delete(veterinario);
-				return Void.TYPE;
-			})
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Veterinário não Encontrado!"));
-		
-	}
+	
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
@@ -80,5 +70,15 @@ public class VeterinarioController {
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	
 	}
+	
+	@PutMapping("/situacao/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void editarSituacao(@PathVariable Long id, @RequestBody String situacao) {
+		repository.findById(id).map(veterinario->{
+			veterinario.setSituacao(situacao);
+			return repository.save(veterinario);
+		}).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+	
 
 }
