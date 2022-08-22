@@ -1,0 +1,5 @@
+senha: 
+2011550203Mgl
+
+SCryptPasswordEncode:
+$e0801$jI5A6pY1V5vbVKuOS4h1FNDvuO4lijrzXllhbYfNE0pyh84uz3IH/ZuN2+/lytFydBl1K/gqHonp0y6aEuf6cg==$CmeDvAdh1d/Iv+qKcrXKtc388wJgMCPAlEa4dC8OnJw=

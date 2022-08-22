@@ -15,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AgendamentoViewComponent } from './componentes/agendamento-view/agendamento-view.component';
 import { AgendamentoFormComponent } from './componentes/agendamento-form/agendamento-form.component';
 import { AgendamentoDetalheComponent } from './componentes/agendamento-detalhe/agendamento-detalhe.component';
+import { AgendamentoEditComponent } from './componentes/agendamento-edit/agendamento-edit.component';
 
 
 registerLocaleData(localePt);
@@ -24,7 +25,8 @@ registerLocaleData(localePt);
     AgendamentosListComponent,
     AgendamentoViewComponent,
     AgendamentoFormComponent,
-    AgendamentoDetalheComponent
+    AgendamentoDetalheComponent,
+    AgendamentoEditComponent
   ],
   imports: [
     CommonModule,

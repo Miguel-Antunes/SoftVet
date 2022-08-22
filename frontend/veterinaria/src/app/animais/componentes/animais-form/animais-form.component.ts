@@ -43,7 +43,7 @@ export class AnimaisFormComponent implements OnInit {
       cor: [null, [Validators.required, Validators.maxLength(50)]],
       altura: [null, [Validators.required, Validators.max(1000)]],
       peso: [null, [Validators.required, Validators.max(5000)]],
-      tipoSangue: [null, [Validators.maxLength(3)]]
+      tipoSangue: [null, [Validators.maxLength(20)]]
     })
   }
   buscarProprietario(): void {

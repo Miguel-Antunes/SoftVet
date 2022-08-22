@@ -54,7 +54,7 @@ export class LoginComponent {
           const access_token = JSON.stringify(response);
           localStorage.setItem('access_token', access_token)
           console.log(response);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/agendamentos/view']);
         }, responseErro => {
           this.poNotification.setDefaultDuration(2000);
           this.poNotification.warning("Usuário e/ou senha incorreto(a)")

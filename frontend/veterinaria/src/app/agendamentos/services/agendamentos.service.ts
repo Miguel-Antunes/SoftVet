@@ -27,10 +27,11 @@ export class AgendamentosService {
   }
 
   editar(id: number, agendamento: Agendamento): Observable<Agendamento> {
+    console.log(agendamento)
     return this.http.put<Agendamento>(this.apiUrl + '/' + id, agendamento)
   }
 
   deletar(id: number): Observable<void> {
-    return this.http.delete<void>('http://localhost:8080/api/agendamentos/' + id)
+    return this.http.delete<void>(this.apiUrl + '/' + id)
   }
 }

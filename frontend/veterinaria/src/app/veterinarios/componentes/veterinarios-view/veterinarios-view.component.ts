@@ -91,7 +91,7 @@ export class VeterinariosViewComponent implements OnInit {
 
   }
   recuperarConsultasPorVeterinario(): void {
-    this.consultaService.recuperarConsulataPorVeterinario(this.idVeterinario).subscribe(response => {
+    this.consultaService.recuperarConsultaPorVeterinario(this.idVeterinario).subscribe(response => {
       this.veterinario = {
         ...this.aux,
         totalConsulta: response.length

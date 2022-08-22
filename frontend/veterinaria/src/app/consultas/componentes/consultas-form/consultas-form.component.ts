@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PoNotificationService } from '@po-ui/ng-components';
 import { map } from 'rxjs';
-import { AgendamentosService } from 'src/app/agendamentos/services/agendamentos.service';
 import { AnimaisService } from 'src/app/animais/services/animais.service';
 import { VeterinariosService } from 'src/app/veterinarios/services/veterinarios.service';
+import { ConsultasService } from '../../services/consultas.service';
 
 
 @Component({
@@ -19,15 +21,16 @@ export class ConsultasFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private agendamentoService: AgendamentosService,
     private animalService: AnimaisService,
-    private veterinarioService: VeterinariosService
+    private veterinarioService: VeterinariosService,
+    private consultaService: ConsultasService,
+    private router: Router,
+    private notificationService: PoNotificationService
   ) { }
 
   ngOnInit(): void {
     this.configurarFormulario();
     this.buscarAnimal();
-    this.buscarAgendamento();
     this.buscarVeterinario();
 
 
@@ -35,34 +38,49 @@ export class ConsultasFormComponent implements OnInit {
   }
   configurarFormulario(): void {
     this.formulario = this.formBuilder.group({
-      animal: [null],
-      veterinario: [null],
-      dataAgendamento: [],
-      estadoAnimal: [null],
-      ferimento: [null],
-      dores: [null],
-      febre: [null],
-      queixa: [null],
+      animal: [null, Validators.required],
+      veterinario: [null, Validators.required],
+      estadoAnimal: [null, Validators.required],
+      ferimento: [null, Validators.required],
+      dores: [null, Validators.required],
+      febre: [null, Validators.required],
+      queixa: [null, Validators.required],
       observacao: [null],
-      procedimento: [null],
-      receita: [null],
-      situacao: []
+      procedimento: [null, Validators.required],
+      receita: [null]
     })
   }
   onSubmit(): void {
-    console.log({
-      id: this.formulario.get("animal").value
-    })
+
+
+    for (const campo in this.formulario.value) {
+      this.formulario.get(campo).markAsDirty();
+    }
+    if (!this.formulario.valid) {
+      this.notificationService.setDefaultDuration(2000);
+      this.notificationService.warning('Preencha os campos obrigatórios!');
+
+    } else {
+      let idAnimal = this.formulario.get("animal").value;
+      this.formulario.get("animal").patchValue({
+        id: idAnimal
+      })
+      let idVeterinario = this.formulario.get("veterinario").value;
+      this.formulario.get("veterinario").patchValue({
+        id: idVeterinario
+      })
+      this.consultaService.cadastrarConsulta(this.formulario.value).subscribe(response => {
+
+        this.router.navigate(['consultas/view/' + response.id])
+      })
+
+
+    }
   }
   cancelar(): void {
 
   }
 
-  buscarAgendamento(): void {
-    this.agendamentoService.recuperarPorId(7).subscribe((response) => {
-      console.log(response)
-    })
-  }
   buscarAnimal(): void {
     let label: any;
     this.animalService.recuperarTodos()
@@ -77,7 +95,7 @@ export class ConsultasFormComponent implements OnInit {
         ))
       .subscribe((response) => {
         this.animais = response;
-        console.log(this.animais)
+
       })
   }
 

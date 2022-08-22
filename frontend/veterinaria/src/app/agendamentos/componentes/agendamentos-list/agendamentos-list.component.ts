@@ -23,11 +23,15 @@ export class AgendamentosListComponent implements OnInit {
   actionsTable: PoTableAction[] = [
     {
       label: 'Alterar',
-      action: null
+      action: this.editar.bind(this)
     },
     {
       label: 'Excluir',
       action: null
+    },
+    {
+      label: 'Visualizar',
+      action: this.visualizar.bind(this)
     }
   ]
 
@@ -87,5 +91,12 @@ export class AgendamentosListComponent implements OnInit {
 
   registrarProprietario() {
     this.router.navigate(['agendamentos/form'])
+  }
+
+  editar(agendamento: Agendamento) {
+    this.router.navigate([`../../agendamentos/edit/${agendamento.id}`])
+  }
+  visualizar(agendamento: Agendamento): void {
+    this.router.navigate(['agendamentos/detalhe/' + agendamento.id])
   }
 }

@@ -39,7 +39,7 @@ export class ConsultasViewComponent implements OnInit {
       return response;
     }))
       .subscribe(response => {
-        console.log(response)
+
         this.consulta = {
           ...response,
           nomeAnimal: response.animal.nome,

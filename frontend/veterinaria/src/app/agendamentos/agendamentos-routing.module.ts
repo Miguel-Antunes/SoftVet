@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../layout/componentes/layout/layout.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { AgendamentoDetalheComponent } from './componentes/agendamento-detalhe/agendamento-detalhe.component';
+import { AgendamentoEditComponent } from './componentes/agendamento-edit/agendamento-edit.component';
 import { AgendamentoFormComponent } from './componentes/agendamento-form/agendamento-form.component';
 import { AgendamentoViewComponent } from './componentes/agendamento-view/agendamento-view.component';
 import { AgendamentosListComponent } from './componentes/agendamentos-list/agendamentos-list.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'list', component: AgendamentosListComponent },
       { path: 'form', component: AgendamentoFormComponent },
       { path: 'detalhe/:id', component: AgendamentoDetalheComponent },
+      { path: 'edit/:id', component: AgendamentoEditComponent },
       { path: '', redirectTo: '/agendamentos/view', pathMatch: 'full' }
 
 

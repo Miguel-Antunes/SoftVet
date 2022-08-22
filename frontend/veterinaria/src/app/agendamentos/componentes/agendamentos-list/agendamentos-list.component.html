@@ -1,6 +1,6 @@
-<po-page-default [p-actions]="actions" [p-breadcrumb]="breadCrumb" p-title="Listagem de Proprietários">
+<po-page-default [p-actions]="actions" [p-breadcrumb]="breadCrumb" p-title="Listagem de Agendamentos">
 
-    <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="agendamentos">
+    <po-table [p-actions]="actionsTable" [p-columns]="columns" [p-items]="agendamentos" [p-actions-right]="true">
 
         <ng-template p-table-column-template p-property="dataRealizacao" let-value>
             <span [innerText]="value | data"></span>

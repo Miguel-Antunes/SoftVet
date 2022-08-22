@@ -28,11 +28,13 @@ export class ProprietariosViewAnimaisComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.pegarIdProprietario();
     this.recuperarAnimaisPorProprietario();
 
     setTimeout(() => {
       this.animaisFiltrado = [...this.animais];
+      console.log(this.animais)
     }, 300);
 
   }

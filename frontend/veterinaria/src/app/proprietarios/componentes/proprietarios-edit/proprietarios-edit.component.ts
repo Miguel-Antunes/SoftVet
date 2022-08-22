@@ -66,7 +66,7 @@ export class ProprietariosEditComponent implements OnInit {
         cidade: response.uf,
         rua: response.rua,
         numero: response.numero,
-        complemento: response.numero,
+        complemento: response.complemento,
       }
       )
     })

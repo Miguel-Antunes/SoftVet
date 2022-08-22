@@ -12,7 +12,7 @@ export class ConsultasService {
   constructor(private http: HttpClient) { }
 
   apiUrl = environment.apiURLBase + "/api/consultas"
-  recuperarConsulataPorVeterinario(idVeterinario: number): Observable<Consulta[]> {
+  recuperarConsultaPorVeterinario(idVeterinario: number): Observable<Consulta[]> {
     return this.http.get<Consulta[]>(this.apiUrl + '/veterinario/' + idVeterinario)
   }
 
@@ -25,5 +25,8 @@ export class ConsultasService {
   }
   recuperarTodas(): Observable<Consulta[]> {
     return this.http.get<Consulta[]>(this.apiUrl)
+  }
+  cadastrarConsulta(consulta: Consulta): Observable<Consulta> {
+    return this.http.post<Consulta>(this.apiUrl, consulta)
   }
 }

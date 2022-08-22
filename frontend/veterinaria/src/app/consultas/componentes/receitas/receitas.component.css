@@ -1,0 +1,28 @@
+    /* .conteudo {
+        width: 10vw;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .col md-6 {
+        background-color: blue;
+    }
+
+    .imagem {
+        display: flex;
+        justify-content: center;
+    } */
+
+    .conteudo {
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        border-radius: 25px;
+        display: flex;
+        justify-content: center;
+        height: 90vh;
+        width: 60vw;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.886) 0%, rgba(255, 255, 255, 0.958) 100%), url("../../../../assets/img/teste.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }

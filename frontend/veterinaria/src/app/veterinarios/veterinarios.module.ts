@@ -5,8 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PoModule, PoPageModule } from '@po-ui/ng-components';
 
-import { CpfCnpjPipe } from '../shared/pipes/cpfCnpj.pipe';
-import { PhonePipe } from '../shared/pipes/phone.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { VeterinariosFormComponent } from './componentes/veterinarios-form/veterinarios-form.component';
 import { VeterinariosListComponent } from './componentes/veterinarios-list/veterinarios-list.component';

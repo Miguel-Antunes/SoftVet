@@ -32,6 +32,7 @@ export class AgendamentoDetalheComponent implements OnInit {
     this.configurarFormulario();
   }
   aux: any;
+  idVeterinario: number;
   idAgendamento: number;
   formulario: FormGroup;
   animais: any[];
@@ -57,10 +58,14 @@ export class AgendamentoDetalheComponent implements OnInit {
         this.formulario.patchValue({
           descricao: response.descricao,
           animal: response.animal.id,
-          veterinario: response.veterinario.id,
           prioridade: response.prioridade,
           dataRealizacao: response.dataRealizacao
         })
+        if (response.veterinario) {
+          this.formulario.patchValue({
+            veterinario: response.veterinario.id
+          })
+        }
       })
   }
 
@@ -105,7 +110,6 @@ export class AgendamentoDetalheComponent implements OnInit {
     this.router.navigate(['/agendamentos/view'])
   }
   consulta(): void {
-    console.log(this.idAgendamento)
     this.router.navigate(['/consultas/form/' + this.idAgendamento])
 
   }

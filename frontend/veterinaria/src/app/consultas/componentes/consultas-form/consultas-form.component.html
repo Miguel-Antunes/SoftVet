@@ -18,18 +18,10 @@
             </div>
         </div>
 
-        <div class="po-row">
-            <div class="po-md-6">
-                <po-input p-label="Data agendamento: " formControlName="dataAgendamento">
-
-                </po-input>
-
-            </div>
-        </div>
         <div class="col-md-12 pt-3">
 
             <div class="formulario-label">
-                Formulario rápido:
+                Formulario rápido: *
             </div>
             <table class="table table-striped">
 
@@ -147,13 +139,12 @@
 
         </div>
 
-        <po-textarea name="textarea" p-label="Queixa:" [p-rows]="4" [p-maxlength]="350"> </po-textarea>
-        <po-textarea name="textarea" p-label="Observação: " [p-maxlength]="200"> </po-textarea>
-        <po-textarea name="textarea" p-label="Procedimento: " [p-maxlength]="400"> </po-textarea>
-        <po-textarea name="textarea" p-label="Receita: " [p-rows]="10" [p-maxlength]="400"> </po-textarea>
-
-
-
+        <po-textarea formControlName="queixa" p-label="Queixa: *" [p-rows]="4" [p-maxlength]="350">
+        </po-textarea>
+        <po-textarea formControlName="observacao" p-label="Observação: " [p-maxlength]="200"> </po-textarea>
+        <po-textarea formControlName="procedimento" p-label="Procedimento: *" [p-maxlength]="400"> </po-textarea>
+        <po-rich-text formControlName="receita" [p-height]="262" p-label="Receita: ">
+        </po-rich-text>
 
         <div class="row botoes">
             <div class="coluna">
