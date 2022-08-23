@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ReceitaViewComponent } from './receita-view/receita-view.component';
 import { PoModule, PoPageModule } from '@po-ui/ng-components';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { PoModule, PoPageModule } from '@po-ui/ng-components';
   imports: [
     CommonModule,
     PoModule,
-    PoPageModule
+    PoPageModule,
+    SharedModule
   ]
 })
 export class ReceitasModule { }

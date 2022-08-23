@@ -26,8 +26,13 @@
             <po-textarea [p-rows]="10" [ngModel]="receita" [p-disabled]="true"> </po-textarea>
         </div>
     </div>
-    <div class="pb-5">
+    <div class="row mt-3">
+        <div class="col-md-12 d-flex justify-content-end">
 
+            <button type="button" class="btn btn-lg btn-secondary mr-5" (click)="imprimirReceita()">Imprimir
+                Receita</button>
+        </div>
     </div>
+
 
 </div>

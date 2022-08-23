@@ -9,7 +9,7 @@ import { ConsultasListComponent } from './componentes/consultas-list/consultas-l
 import { SharedModule } from '../shared/shared.module';
 import { ConsultasViewComponent } from './componentes/consultas-view/consultas-view.component';
 import { ConsultasAgendadasFormComponent } from './componentes/consultas-agendadas-form/consultas-agendadas-form.component';
-import { ReceitasComponent } from './componentes/receitas/receitas.component';
+
 
 
 @NgModule({
@@ -17,8 +17,7 @@ import { ReceitasComponent } from './componentes/receitas/receitas.component';
     ConsultasFormComponent,
     ConsultasListComponent,
     ConsultasViewComponent,
-    ConsultasAgendadasFormComponent,
-    ReceitasComponent
+    ConsultasAgendadasFormComponent
   ],
   imports: [
     CommonModule,

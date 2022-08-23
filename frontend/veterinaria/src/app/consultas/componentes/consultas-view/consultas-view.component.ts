@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PoDynamicViewField } from '@po-ui/ng-components';
 import { map } from 'rxjs';
 import { DataPipe } from 'src/app/shared/pipes/data.pipe';
@@ -17,7 +17,8 @@ export class ConsultasViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private consultaService: ConsultasService,
-    private dataPipe: DataPipe
+    private dataPipe: DataPipe,
+    private router: Router
   ) { }
 
   formulario: FormGroup;
@@ -71,5 +72,9 @@ export class ConsultasViewComponent implements OnInit {
   receita: any;
   queixa: any;
   observacao: any;
+
+  imprimirReceita(): void {
+    this.router.navigate(['/consultas/view/receita/' + this.idConsulta])
+  }
 }
 

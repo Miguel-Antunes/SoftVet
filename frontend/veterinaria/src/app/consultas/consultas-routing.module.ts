@@ -6,7 +6,7 @@ import { AuthGuard } from '../shared/guards/auth.guard';
 import { ConsultasFormComponent } from './componentes/consultas-form/consultas-form.component';
 import { ConsultasViewComponent } from './componentes/consultas-view/consultas-view.component';
 import { ConsultasAgendadasFormComponent } from './componentes/consultas-agendadas-form/consultas-agendadas-form.component';
-import { ReceitasComponent } from './componentes/receitas/receitas.component';
+
 
 const routes: Routes = [
   {
