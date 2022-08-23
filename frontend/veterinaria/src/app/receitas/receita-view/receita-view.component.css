@@ -60,6 +60,7 @@
     text-align: justify;
     font-size: 15px;
     color: black;
+    white-space: pre-wrap;
 }
 
 .row.assinatura {
@@ -85,4 +86,14 @@
 .linha {
     width: 50%;
     background-color: rgb(52, 51, 51);
+}
+
+@media print {
+    #noprint {
+        display: none;
+    }
+
+    body {
+        background: #fff;
+    }
 }

@@ -27,7 +27,7 @@ export class AgendamentosListComponent implements OnInit {
     },
     {
       label: 'Excluir',
-      action: null
+      action: this.excluir.bind(this)
     },
     {
       label: 'Visualizar',
@@ -98,5 +98,12 @@ export class AgendamentosListComponent implements OnInit {
   }
   visualizar(agendamento: Agendamento): void {
     this.router.navigate(['agendamentos/detalhe/' + agendamento.id])
+  }
+  excluir(agendamento: Agendamento): void {
+    if (confirm("Deseja excluir o agendamento " + agendamento.descricao + "?")) {
+      this.agendamentoService.deletar(agendamento.id).subscribe((response) => {
+        location.reload();
+      })
+    }
   }
 }

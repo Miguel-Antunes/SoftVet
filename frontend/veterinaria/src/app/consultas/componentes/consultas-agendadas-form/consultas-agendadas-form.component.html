@@ -10,18 +10,19 @@
 
         <div class="po-row">
             <div class="po-md-6">
-                <po-combo formControlName="animal" p-label="Animal: *" [p-options]="animais"></po-combo>
+                <po-input formControlName="animal" p-label="Animal: *" [p-placeholder]="animal" p-disabled="true">
+                </po-input>
             </div>
             <div class="po-md-6">
-                <po-combo formControlName="veterinario" p-label="Veterinário: *" [p-options]="veterinarios">
-                </po-combo>
+                <po-input formControlName="veterinario" p-label="Veterinário: *" [p-placeholder]="veterinario"
+                    p-disabled="true">
+                </po-input>
             </div>
         </div>
 
         <div class="po-row">
             <div class="po-md-6">
-                <po-input p-label="Data agendamento: " formControlName="dataAgendamento">
-
+                <po-input p-label="Data agendada: *" [p-placeholder]="dataAgendamento" p-disabled="true">
                 </po-input>
 
             </div>
@@ -29,7 +30,7 @@
         <div class="col-md-12 pt-3">
 
             <div class="formulario-label">
-                Formulario rápido:
+                Formulario rápido: *
             </div>
             <table class="table table-striped">
 
@@ -147,12 +148,10 @@
 
         </div>
 
-        <po-textarea name="textarea" p-label="Queixa:" [p-rows]="4" [p-maxlength]="350"> </po-textarea>
-        <po-textarea name="textarea" p-label="Observação: " [p-maxlength]="200"> </po-textarea>
-        <po-textarea name="textarea" p-label="Procedimento: " [p-maxlength]="400"> </po-textarea>
-        <po-textarea name="textarea" p-label="Receita: " [p-rows]="10" [p-maxlength]="400"> </po-textarea>
-
-
+        <po-textarea formControlName="queixa" p-label="Queixa: *" [p-rows]="4" [p-maxlength]="350"> </po-textarea>
+        <po-textarea formControlName="observacao" p-label="Observação: " [p-maxlength]="200"> </po-textarea>
+        <po-textarea formControlName="procedimento" p-label="Procedimento: *" [p-maxlength]="400"> </po-textarea>
+        <po-textarea formControlName="receita" p-label="Receita: " [p-rows]="10" [p-maxlength]="400"> </po-textarea>
 
 
         <div class="row botoes">

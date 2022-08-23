@@ -41,6 +41,7 @@ export class ReceitaViewComponent implements OnInit {
         this.nomeAnimal = response.animal.nome;
         this.nomeProprietario = response.animal.proprietario.nome;
         this.nomeVeterinario = response.veterinario.nome;
+        console.log(response.receita)
         this.receita = response.receita;
 
 

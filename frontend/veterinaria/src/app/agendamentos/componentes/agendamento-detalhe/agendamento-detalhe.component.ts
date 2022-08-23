@@ -26,8 +26,8 @@ export class AgendamentoDetalheComponent implements OnInit {
 
   ngOnInit(): void {
     this.pegarIdAgendamento();
-    this.recuperarAnimais();
-    this.recuperarVeterinarios();
+    // this.recuperarAnimais();
+    // this.recuperarVeterinarios();
     this.recuperarAgendamento();
     this.configurarFormulario();
   }
@@ -35,8 +35,8 @@ export class AgendamentoDetalheComponent implements OnInit {
   idVeterinario: number;
   idAgendamento: number;
   formulario: FormGroup;
-  animais: any[];
-  veterinarios: any[];
+  //animais: any[];
+  //veterinarios: any[];
   prioridade: any = [
     { label: " Baixa", value: "baixa" },
     { label: " Moderada", value: "moderada" },
@@ -57,13 +57,13 @@ export class AgendamentoDetalheComponent implements OnInit {
       .subscribe(response => {
         this.formulario.patchValue({
           descricao: response.descricao,
-          animal: response.animal.id,
+          animal: response.animal.nome,
           prioridade: response.prioridade,
           dataRealizacao: response.dataRealizacao
         })
         if (response.veterinario) {
           this.formulario.patchValue({
-            veterinario: response.veterinario.id
+            veterinario: response.veterinario.nome
           })
         }
       })
@@ -80,39 +80,38 @@ export class AgendamentoDetalheComponent implements OnInit {
     });
   }
 
-  recuperarAnimais(): void {
-    this.animalService.recuperarTodos().pipe(map(animais => {
-      return animais.map(animal => {
-        return {
-          label: animal.nome,
-          value: animal.id
-        }
+  // recuperarAnimais(): void {
+  //   this.animalService.recuperarTodos().pipe(map(animais => {
+  //     return animais.map(animal => {
+  //       return {
+  //         label: animal.nome,
+  //         value: animal.id
+  //       }
 
-      })
-    })).subscribe(animais => {
-      this.animais = animais;
-    })
-  }
-  recuperarVeterinarios(): void {
-    this.veterinarioService.recuperarTodos().pipe(map(veterinarios => {
-      return veterinarios.map(veterinario => {
-        return {
-          label: veterinario.nome,
-          value: veterinario.id
-        }
+  //     })
+  //   })).subscribe(animais => {
+  //     this.animais = animais;
+  //   })
+  // }
+  // recuperarVeterinarios(): void {
+  //   this.veterinarioService.recuperarTodos().pipe(map(veterinarios => {
+  //     return veterinarios.map(veterinario => {
+  //       return {
+  //         label: veterinario.nome,
+  //         value: veterinario.id
+  //       }
 
-      })
-    })).subscribe(veterinario => {
-      this.veterinarios = veterinario;
-    })
-  }
+  //     })
+  //   })).subscribe(veterinario => {
+  //     this.veterinarios = veterinario;
+  //   })
+  // }
   voltar(): void {
     this.router.navigate(['/agendamentos/view'])
   }
   consulta(): void {
-    this.router.navigate(['/consultas/form/' + this.idAgendamento])
+    this.router.navigate(['/consultas/agendadas/form/' + this.idAgendamento])
 
   }
-
 
 }

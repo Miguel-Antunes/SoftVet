@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: 'consultas', component: LayoutComponent, canActivate: [AuthGuard], children: [
       { path: 'form', component: ConsultasFormComponent },
+      { path: 'agendadas/form/:id', component: ConsultasAgendadasFormComponent },
       { path: 'form/:id', component: ConsultasAgendadasFormComponent },
       { path: 'list', component: ConsultasListComponent },
       { path: 'view/:id', component: ConsultasViewComponent },

@@ -17,7 +17,6 @@ export class ConsultasFormComponent implements OnInit {
   formulario: FormGroup
   animais: any[];
   veterinarios: any[];
-  agendado: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,9 +31,6 @@ export class ConsultasFormComponent implements OnInit {
     this.configurarFormulario();
     this.buscarAnimal();
     this.buscarVeterinario();
-
-
-
   }
   configurarFormulario(): void {
     this.formulario = this.formBuilder.group({

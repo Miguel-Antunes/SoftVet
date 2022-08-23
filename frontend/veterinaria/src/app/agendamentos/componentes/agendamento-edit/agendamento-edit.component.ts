@@ -27,8 +27,8 @@ export class AgendamentoEditComponent implements OnInit {
   ngOnInit(): void {
     this.pegarIdAgendamento();
     this.recuperarAnimais();
-    this.recuperarVeterinarios();
-    this.recuperarAgendamento();
+    // this.recuperarVeterinarios();
+    // this.recuperarAgendamento();
     this.configurarFormulario();
   }
   aux: any;
@@ -87,6 +87,7 @@ export class AgendamentoEditComponent implements OnInit {
       })
     })).subscribe(animais => {
       this.animais = animais;
+      this.recuperarVeterinarios();
     })
   }
   recuperarVeterinarios(): void {
@@ -100,6 +101,7 @@ export class AgendamentoEditComponent implements OnInit {
       })
     })).subscribe(veterinario => {
       this.veterinarios = veterinario;
+      this.recuperarAgendamento();
     })
   }
   cancelar(): void {
